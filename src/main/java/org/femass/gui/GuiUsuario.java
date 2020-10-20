@@ -28,6 +28,8 @@ public class GuiUsuario implements Serializable {
     @EJB
     UsuarioDao usuarioDao;
     
+    private Usuario user;
+    
     private List<Usuario> usuarios;
     
     public GuiUsuario() {
@@ -38,9 +40,23 @@ public class GuiUsuario implements Serializable {
         usuarios = usuarioDao.listar();
         return "LstUsuario";
     }
+    
+    public String cadastrar(){
+        user = new Usuario();
+        return "CadUsuario";
+    }
+    
+    public String gravar(){
+        usuarioDao.gravar(user);
+        return "LstUsuario";
+    }
 
     public List<Usuario> getUsuarios() {
         return usuarios;
+    }
+
+    public Usuario getUser() {
+        return user;
     }
     
     

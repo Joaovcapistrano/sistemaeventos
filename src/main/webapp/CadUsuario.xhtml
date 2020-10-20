@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Cadastrar Usuario</title>
+    </h:head>
+    <h:body>
+        <h:form>
+        <h3>Dados Cadastrais</h3>
+            <div class="ui-fluid">
+                <div class="p-field">
+                    <p:outputLabel for="nome" value="Nome Completo" />
+                    <p:inputText id="nome" value="#{guiUsuario.user.nomeCompleto}" />
+                </div>
+                <div class="p-field">
+                    <p:outputLabel for="dataNasc" value="Data de Nascimento" />
+                    <p:calendar id="dataNasc" value="#{guiUsuario.user.dataNascimento}" pattern="dd/MM/yyyy" mask="99/99/9999" showOn="button" />
+                </div>
+                <div class="p-field">
+                    <h:outputText value="Sexo" />
+                    <p:selectOneButton value="#{guiUsuario.user.sexo}">
+                        <f:selectItem itemLabel="Masculino" itemValue="masculino" />
+                        <f:selectItem itemLabel="Feminino" itemValue="feminino" />                        
+                    </p:selectOneButton>
+                </div>
+                <div class="p-field">
+                    <p:outputLabel for="endereco" value="Endereço" />
+                    <p:inputText id="endereco" value="#{guiUsuario.user.endereco}" />
+                </div>
+                <div class="p-field">
+                    <p:outputLabel for="login" value="Login" />
+                    <p:inputText id="login" value="#{guiUsuario.user.login}" />
+                </div>
+                <div class="p-field">
+                    <h:outputText value="Senha" />
+                    <p:password id="senha" value="#{guiUsuario.user.senha}" feedback="true" />
+                </div>
+                <div class="p-field">
+                   <p:commandButton value="Gravar" id="gravar" action="#{guiUsuario.gravar()}" style="margin-right:20px;" ajax="false" />
+                </div>
+ 
+            </div>
+        </h:form>
+    </h:body>
+</html>
+

@@ -8,6 +8,9 @@
         <title>Lista de Usuarios</title>
     </h:head>
     <h:body>
+        <h:form>
+            <p:commandButton value="Cadastrar" id="cad" action="#{guiUsuario.cadastrar()}" style="margin-right:20px;" ajax="false" />
+        </h:form>
         <p:dataTable var="user" value="#{guiUsuario.usuarios}">
             <p:column headerText="ID">
                 <h:outputText value="#{user.id}" />
@@ -18,7 +21,7 @@
             </p:column>
 
             <p:column headerText="Data de Nascimento">
-                <h:outputText value="#{user.dataNascimento}" />
+                <h:outputText value="#{user.dataNascimento}"  />
             </p:column>
 
             <p:column headerText="Mais detalhes">
