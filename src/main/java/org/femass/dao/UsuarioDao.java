@@ -31,5 +31,11 @@ public class UsuarioDao {
         em.remove(usuario);
     }
     
+    public List<Usuario> listar()
+    {
+        Query q = em.createQuery("select u from Usuario u order by u.nomeCompleto");
+        return q.getResultList();
+    }
+    
     
 }

@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Lista de Usuarios</title>
+    </h:head>
+    <h:body>
+        <p:dataTable var="user" value="#{guiUsuario.usuarios}">
+            <p:column headerText="ID">
+                <h:outputText value="#{user.id}" />
+            </p:column>
+
+            <p:column headerText="Nome Completo">
+                <h:outputText value="#{user.nomeCompleto}" />
+            </p:column>
+
+            <p:column headerText="Data de Nascimento">
+                <h:outputText value="#{user.dataNascimento}" />
+            </p:column>
+
+            <p:column headerText="Mais detalhes">
+                <h:form>
+                    <p:commandButton value="Ver Mais" id="details" action="#{buttonView.buttonAction}" style="margin-right:20px;" ajax="false" />
+                </h:form>
+            </p:column>
+        </p:dataTable>
+    </h:body>
+</html>
+
