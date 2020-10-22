@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -32,7 +33,7 @@ public class Usuario implements Serializable {
     private String login;
     private String senha;
     
-    @OneToMany
+    @OneToMany(cascade = CascadeType.PERSIST)
     private List<Telefone> telefones = new ArrayList();
     
     @OneToMany
@@ -118,7 +119,10 @@ public class Usuario implements Serializable {
     }
     
     public void adicionarTelefones(Telefone telefone){
-        telefones.add(telefone);
+        if(telefone.getDdd()!=null && telefone.getNumero()!=null)
+        {
+            telefones.add(telefone);
+        }   
     }
     
     public void removerTelefones(Telefone telefone){
@@ -139,6 +143,14 @@ public class Usuario implements Serializable {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public NivelAcesso getNivelAcesso() {
+        return nivelAcesso;
+    }
+
+    public void setNivelAcesso(NivelAcesso nivelAcesso) {
+        this.nivelAcesso = nivelAcesso;
     }
     
     

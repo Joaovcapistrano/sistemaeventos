@@ -10,7 +10,10 @@ import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
+import org.femass.dao.TelefoneDao;
 import org.femass.dao.UsuarioDao;
+import org.femass.model.NivelAcesso;
+import org.femass.model.Telefone;
 import org.femass.model.Usuario;
 
 /**
@@ -28,10 +31,17 @@ public class GuiUsuario implements Serializable {
     @EJB
     UsuarioDao usuarioDao;
     
+    @EJB
+    TelefoneDao telefoneDao;
+    
     private Usuario user;
+    
+    private Usuario usuarioSelecionado;
     
     private List<Usuario> usuarios;
     
+    private Telefone telefone;
+        
     public GuiUsuario() {
   
     }
@@ -43,12 +53,17 @@ public class GuiUsuario implements Serializable {
     
     public String cadastrar(){
         user = new Usuario();
+        telefone = new Telefone();
         return "CadUsuario";
     }
     
     public String gravar(){
         usuarioDao.gravar(user);
-        return "LstUsuario";
+//        for(Telefone tel: user.getTelefones())
+//        {
+//            telefoneDao.gravar(tel);
+//        }  
+        return inicializarLista();
     }
 
     public List<Usuario> getUsuarios() {
@@ -57,6 +72,35 @@ public class GuiUsuario implements Serializable {
 
     public Usuario getUser() {
         return user;
+    }
+
+    public void setUser(Usuario user) {
+        this.user = user;
+    }    
+    
+    public void novoTelefone(){
+        telefone = new Telefone();
+        telefone.setUsuario(user);
+    }
+
+    public Telefone getTelefone() {
+        return telefone;
+    }
+    
+    public void setTelefone(Telefone telefone) {
+        this.telefone = telefone;
+    }
+
+    public NivelAcesso[] getTiposDeUsuario() {
+        return NivelAcesso.values();
+    }
+
+    public Usuario getUsuarioSelecionado() {
+        return usuarioSelecionado;
+    }
+
+    public void setUsuarioSelecionado(Usuario usuarioSelecionado) {
+        this.usuarioSelecionado = usuarioSelecionado;
     }
     
     

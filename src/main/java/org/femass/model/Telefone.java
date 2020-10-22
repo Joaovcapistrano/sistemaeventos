@@ -6,10 +6,12 @@
 package org.femass.model;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Telefone implements Serializable {
@@ -20,6 +22,29 @@ public class Telefone implements Serializable {
     private Long id;
     private String ddd;
     private String numero;
+    
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    private Usuario usuario;
+
+    public Telefone(){
+        
+    }
+    
+    public Telefone(String ddd, String numero, Usuario usuario) {
+        this.ddd = ddd;
+        this.numero = numero;
+        this.usuario = usuario;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+    
+    
 
     public Long getId() {
         return id;
@@ -51,7 +76,7 @@ public class Telefone implements Serializable {
 
     @Override
     public String toString() {
-        return "org.femass.model.Telefone[ id=" + id + " ]";
+        return "(" + ddd + ") " + numero;
     }
 
     public String getDdd() {
