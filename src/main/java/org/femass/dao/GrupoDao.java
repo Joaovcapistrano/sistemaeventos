@@ -31,5 +31,11 @@ public class GrupoDao {
         em.remove(grupo);
     }
     
+    public List<GrupoTrabalho> listar()
+    {
+        Query q = em.createQuery("select g from GrupoTrabalho g order by g.id");
+        return q.getResultList();
+    }
+    
     
 }

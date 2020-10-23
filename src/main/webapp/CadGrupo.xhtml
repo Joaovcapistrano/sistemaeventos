@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Cadastro de Grupo</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <p:growl id="growl" showDetail="true" sticky="true" />
+            <h3>Cadastro de grupo</h3>
+            <p:panelGrid columns="2">
+                <p:outputLabel value="Nome" />
+                <p:inputText value="#{guiGrupo.grupo.nome}" required="true" requiredMessage="Nome é um campo obrigatório" style="width:400px"/>
+                <p:outputLabel value="Descrição" />
+                <p:inputText value="#{guiGrupo.grupo.descricao}" style="width:400px"/>
+                <p:outputLabel value="Data de renovação" />
+                <p:calendar value="#{guiGrupo.grupo.dataRenovacao}" pattern="dd/MM/yyyy" mask="99/99/9999" converter="localDateFacesConverter" showOn="button" />
+                <p:outputLabel value="Líder" />
+                <p:selectOneMenu value="#{guiGrupo.idLider}" style="width:400px">
+                    <f:selectItem itemLabel="Nenhum líder selecionado" itemValue="#{null}" noSelectionOption="true"/>
+                    <f:selectItems value="#{guiGrupo.usuarios}" var="u" itemLabel="#{u.nomeCompleto}" itemValue="#{u.id}" />
+                </p:selectOneMenu>
+                
+            </p:panelGrid>
+            <p:commandButton value="Gravar" action="#{guiGrupo.gravar()}" ajax="false" />
+            <p:commandButton value="Voltar" action="#{guiGrupo.inicializarLista()}" ajax="false" immediate="true" />
+        </h:form>
+    </h:body>
+</html>
+

@@ -28,7 +28,7 @@ public class GrupoTrabalho implements Serializable {
     private Long id;
     private String nome;
     private String descricao;
-    private LocalDate dataCriacao;
+    private LocalDate dataCriacao = LocalDate.now();
     private LocalDate dataRenovacao;
     
     @OneToOne
