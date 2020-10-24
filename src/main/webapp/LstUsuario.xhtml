@@ -8,8 +8,13 @@
         <title>Lista de Usuarios</title>
     </h:head>
     <h:body>
-        <h:form>
-            <p:commandButton value="Cadastrar" id="cad" action="#{guiUsuario.cadastrar()}" style="margin-right:20px;" ajax="false" />
+        <h:form>            
+            <h:column>
+                <p:commandButton value="Voltar" id="voltar" action="index" style="margin-right:20px;" ajax="false" />
+            </h:column>
+            <h:column>
+                <p:commandButton value="Cadastrar" id="cad" action="#{guiUsuario.cadastrar()}" style="margin-right:20px;" ajax="false" />
+            </h:column>
         </h:form>
         <p:dataTable id="userData" var="user" value="#{guiUsuario.usuarios}">
             <p:column headerText="ID">
@@ -27,58 +32,42 @@
             <p:column headerText="Mais detalhes" style="text-align: center">
       
                 <p:commandButton value="Ver Mais" id="details" oncomplete="PF('ver').show()" style="margin-right:20px;" update="verDetalhes">
-                        <f:setPropertyActionListener value="#{user}" target="#{guiUsuario.usuarioSelecionado}"/>
+                    <f:setPropertyActionListener value="#{user}" target="#{guiUsuario.user}"/>
                 </p:commandButton>
             </p:column>
         </p:dataTable>
     </h:body>
     
     <p:dialog id="verDetalhes" dynamic="true" header="Detalhes do Usuário" widgetVar="ver" modal="true" height="525" width="750">
-                        <h:form>
+                            <h:form >
                             <h3>Dados Cadastrais</h3>
-                                <div class="ui-fluid">
-                                    <div class="p-field">
+                                <div id="detalhesForm" class="ui-fluid">
+                                    <div id="divNome" class="p-field">
                                         <p:outputLabel value="Nome Completo" />
-                                        <p:inputText id="nome" value="#{guiUsuario.usuarioSelecionado.nomeCompleto}" disabled="true"/>
+                                        <p:inputText id="nome" value="#{guiUsuario.user.nomeCompleto}" disabled="true"/>
                                     </div>
 
-                                    <div class="p-field">
+                                    <div id="divDataNasc" class="p-field">
                                         <p:outputLabel value="Data de Nascimento" />
-                                        <p:calendar id="dataNasc" value="#{guiUsuario.usuarioSelecionado.dataNascimento}" pattern="dd/MM/yyyy" navigator="true" mask="99/99/9999" showOn="button" disabled="true"/>
+                                        <p:calendar id="dataNasc" value="#{guiUsuario.user.dataNascimento}" pattern="dd/MM/yyyy" navigator="true" mask="99/99/9999" showOn="button" disabled="true"/>
                                     </div>
 
-                                    <div class="p-field">
+                                    <div id="divSexo" class="p-field">
                                         <p:outputLabel value="Sexo" />
-                                        <p:selectOneButton value="#{guiUsuario.usuarioSelecionado.sexo}" disabled="true">
+                                        <p:selectOneButton value="#{guiUsuario.user.sexo}" disabled="true">
                                             <f:selectItem itemLabel="Masculino" itemValue="masculino" />
                                             <f:selectItem itemLabel="Feminino" itemValue="feminino" />                        
                                         </p:selectOneButton>
                                     </div>
 
-                                    <div class="p-field">
+                                    <div id="divEnd" class="p-field">
                                         <p:outputLabel value="Endereço" />
-                                        <p:inputText id="endereco" value="#{guiUsuario.usuarioSelecionado.endereco}" disabled="true"/>
+                                        <p:inputText id="endereco" value="#{guiUsuario.user.endereco}" disabled="true"/>
                                     </div>
 
-                                    <div class="p-field">
+                                    <div id="divTel" class="p-field">
 
-                                        <p:commandButton value="Adicionar Telefone" id="addtelefone" onclick="PF('addtel').show()"  style="margin-right:20px;" disabled="true">
-                                        <f:actionListener binding="#{guiUsuario.novoTelefone()}" /> 
-                                        </p:commandButton>
-
-                                        <p:dialog header="Adicionar Telefone" widgetVar="addtel" modal="true" height="150">
-                                            <p:outputLabel value="DDD" />
-                                            <p:inputText id="ddd" value="#{guiUsuario.telefone.ddd}" />
-
-                                            <p:outputLabel value="Número" />
-                                            <p:inputText id="numero" value="#{guiUsuario.telefone.numero}" />
-
-                                            <p:commandButton value="Gravar Telefone" id="gravarTel" update="tabelaTel" onclick="PF('addtel').hide()" >
-                                            <f:actionListener binding="#{guiUsuario.usuarioSelecionado.adicionarTelefones(guiUsuario.telefone)}" /> 
-                                            </p:commandButton>
-                                        </p:dialog>    
-
-                                        <p:dataTable id="tabelaTel" var="telefone" value="#{guiUsuario.usuarioSelecionado.telefones}" >
+                                        <p:dataTable id="tabelaTel" var="telefone" value="#{guiUsuario.user.telefones}" >
                                             <p:column headerText="DDD">
                                                 <p:outputLabel value="#{telefone.ddd}" />
                                             </p:column>
@@ -91,21 +80,25 @@
 
                                     </div>  
 
-                                    <div class="p-field">
+                                    <div id="divLogin" class="p-field">
                                         <p:outputLabel value="Login" />
-                                        <p:inputText id="login" value="#{guiUsuario.usuarioSelecionado.login}" disabled="true" />
+                                        <p:inputText id="login" value="#{guiUsuario.user.login}" disabled="true" />
                                     </div>
 
 
-                                    <div class="p-field">
+                                    <div id="divTipo" class="p-field">
                                         <p:outputLabel value="Tipo de Usuário   " />
-                                        <p:selectOneMenu id="nivelAcesso" value="#{guiUsuario.usuarioSelecionado.nivelAcesso}" style="width:200px" disabled="true">
+                                        <p:selectOneMenu id="nivelAcesso" value="#{guiUsuario.user.nivelAcesso}" style="width:200px" disabled="true">
                                             <f:selectItems value="#{guiUsuario.tiposDeUsuario}"  />  
                                         </p:selectOneMenu>
                                     </div> 
 
-                                    <div class="p-field">
-                                        <p:commandButton value="Gravar" id="gravar" action="#{guiUsuario.gravar()}" style="margin-right:20px;" ajax="false" disabled="true"/>
+                                    <div id="divAlterar" class="p-field">
+                                        <p:commandButton value="Alterar" id="alterar" action="CadUsuario"  style="margin-right:20px;" ajax="false" />                                                                            
+                                    </div>
+                                    
+                                    <div id="divExcluir" class="p-field">
+                                        <p:commandButton value="Excluir" id="excluir" action="#{guiUsuario.excluir()}"  style="margin-right:20px;" ajax="false" />                                                                            
                                     </div>
 
                                 </div>

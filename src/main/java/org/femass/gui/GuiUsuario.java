@@ -35,12 +35,12 @@ public class GuiUsuario implements Serializable {
     TelefoneDao telefoneDao;
     
     private Usuario user;
-    
-    private Usuario usuarioSelecionado;
-    
+        
     private List<Usuario> usuarios;
     
-    private Telefone telefone;
+    private Telefone telefone = new Telefone();
+    
+    private Boolean ativo=true;
         
     public GuiUsuario() {
   
@@ -58,11 +58,23 @@ public class GuiUsuario implements Serializable {
     }
     
     public String gravar(){
-        usuarioDao.gravar(user);
+        if(user.getId()==null)
+        {
+            usuarioDao.gravar(user);
+        }
+        else
+        {
+            usuarioDao.alterar(user);
+        }
 //        for(Telefone tel: user.getTelefones())
 //        {
 //            telefoneDao.gravar(tel);
 //        }  
+        return inicializarLista();
+    }
+    
+    public String excluir(){
+        usuarioDao.deletar(user);
         return inicializarLista();
     }
 
@@ -82,7 +94,7 @@ public class GuiUsuario implements Serializable {
         telefone = new Telefone();
         telefone.setUsuario(user);
     }
-
+    
     public Telefone getTelefone() {
         return telefone;
     }
@@ -95,13 +107,23 @@ public class GuiUsuario implements Serializable {
         return NivelAcesso.values();
     }
 
-    public Usuario getUsuarioSelecionado() {
-        return usuarioSelecionado;
+    public Boolean getAtivo() {
+        return ativo;
     }
 
-    public void setUsuarioSelecionado(Usuario usuarioSelecionado) {
-        this.usuarioSelecionado = usuarioSelecionado;
+    public void setAtivo(Boolean ativado) {
+        this.ativo = ativado;
     }
     
-    
+    public void ativarDesativar()
+    {
+        if(ativo==true)
+        {
+            ativo=false;
+        }
+        else
+        {
+            ativo=true;
+        }
+    }
 }

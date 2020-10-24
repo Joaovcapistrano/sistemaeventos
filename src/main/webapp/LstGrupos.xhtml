@@ -9,7 +9,12 @@
     </h:head>
     <h:body>
         <h:form>
-            <p:commandButton value="Cadastrar" action="#{guiGrupo.cadastrar()}" ajax="false" icon="fa fa-align-justify" />
+            <h:column>
+                <p:commandButton value="Voltar" id="voltar" action="index" style="margin-right:20px;" ajax="false" />
+            </h:column>
+            <h:column>
+                <p:commandButton value="Cadastrar" action="#{guiGrupo.cadastrar()}" ajax="false" icon="fa fa-align-justify" />
+            </h:column>
             <p:dataTable value="#{guiGrupo.grupos}" var="gr">
                 <p:column headerText="ID" style="width:13px">
                     <p:outputLabel value="#{gr.id}" />

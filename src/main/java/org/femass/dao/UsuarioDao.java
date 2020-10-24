@@ -28,7 +28,7 @@ public class UsuarioDao {
     }
     
     public void deletar(Usuario usuario){
-        em.remove(usuario);
+        em.remove(em.merge(usuario));
     }
     
     public List<Usuario> listar()

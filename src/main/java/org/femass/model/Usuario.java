@@ -33,7 +33,7 @@ public class Usuario implements Serializable {
     private String login;
     private String senha;
     
-    @OneToMany(cascade = CascadeType.PERSIST)
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Telefone> telefones = new ArrayList();
     
     @OneToMany
