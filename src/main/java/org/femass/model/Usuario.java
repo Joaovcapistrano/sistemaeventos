@@ -153,5 +153,11 @@ public class Usuario implements Serializable {
         this.nivelAcesso = nivelAcesso;
     }
     
-    
+        public GrupoTrabalho getGrupoTrabalho() {
+        return grupoTrabalho;
+    }
+
+    public void setGrupoTrabalho(GrupoTrabalho grupoTrabalho) {
+        this.grupoTrabalho = grupoTrabalho;
+    }
 }

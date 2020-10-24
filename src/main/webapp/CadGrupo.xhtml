@@ -17,7 +17,7 @@
                 <p:outputLabel value="Descrição" />
                 <p:inputText value="#{guiGrupo.grupo.descricao}" style="width:400px"/>
                 <p:outputLabel value="Data de renovação" />
-                <p:calendar value="#{guiGrupo.grupo.dataRenovacao}" pattern="dd/MM/yyyy" mask="99/99/9999" converter="localDateFacesConverter" showOn="button" />
+                <p:calendar value="#{guiGrupo.grupo.dataRenovacao}" pattern="dd/MM/yyyy" mask="99/99/9999" converter="localDateFacesConverter" navigator="true" showOn="button" />
                 <p:outputLabel value="Líder" />
                 <p:selectOneMenu value="#{guiGrupo.idLider}" style="width:400px">
                     <f:selectItem itemLabel="Nenhum líder selecionado" itemValue="#{null}" noSelectionOption="true"/>
