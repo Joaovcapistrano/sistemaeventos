@@ -23,10 +23,11 @@ public class Evento implements Serializable {
     private String descricao;
     private LocalDate dataInicio;
     private LocalDate dataFim;
-    private String local;
+    private String localEvento;
+    private String localInscricao;
     private String publicoAlvo;
     private double valorInvestimento;
-    private double valorInscricao;
+    
 
     public Long getId() {
         return id;
@@ -93,12 +94,12 @@ public class Evento implements Serializable {
         this.dataFim = dataFim;
     }
 
-    public String getLocal() {
-        return local;
+    public String getLocalEvento() {
+        return localEvento;
     }
 
-    public void setLocal(String local) {
-        this.local = local;
+    public void setLocalEvento(String localEvento) {
+        this.localEvento = localEvento;
     }
 
     public String getPublicoAlvo() {
@@ -117,12 +118,12 @@ public class Evento implements Serializable {
         this.valorInvestimento = valorInvestimento;
     }
 
-    public double getValorInscricao() {
-        return valorInscricao;
+    public String getLocalInscricao() {
+        return localInscricao;
     }
 
-    public void setValorInscricao(double valorInscricao) {
-        this.valorInscricao = valorInscricao;
+    public void setLocalInscricao(String localInscricao) {
+        this.localInscricao = localInscricao;
     }
     
     

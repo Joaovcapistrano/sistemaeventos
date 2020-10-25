@@ -31,5 +31,15 @@ public class EventoDao {
         em.remove(evento);
     }
     
+    public List<Evento> listar(){
+        Query e = em.createQuery("select e from Evento e order by e.dataInicio");
+        return e.getResultList();
+    }
     
+    public Evento buscarID(String id)
+    {
+        Query e = em.createQuery("select e from Evento e where e.id = :i");
+        e.setParameter("i", id);
+        return (Evento) e.getSingleResult();
+    }
 }

@@ -12,7 +12,64 @@
         <h:form>
             <p:commandButton value="Usuários" id="users" action="#{guiUsuario.inicializarLista()}" style="margin-right:20px;" ajax="false" />
             <p:commandButton value="Grupos" id="grupos" action="#{guiGrupo.inicializarLista()}" style="margin-right:20px;" ajax="false" />
+            <p:commandButton value="Eventos" id="eventos" action="#{guiEvento.inicializarLista()}" style="margin-right:20px;" ajax="false" />
         </h:form>
+        
+        <h:form>            
+            <h:panelGrid columnClasses="value">
+                <p:schedule id="calendario" value="#{scheduleJava8View.eventModel}" draggable="false" resizable="false" widgetVar="calendarioEventos" >            
+                   <!--     <p:ajax event="eventSelect" listener="#{scheduleJava8View.onEventSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" /> -->
+                </p:schedule>
+            </h:panelGrid>
+        </h:form>
+
     </h:body>
+    
+    <p:dialog widgetVar="eventDialog" header="Detalhes do Evento" showEffect="clip" hideEffect="clip">
+                <h:form id="eventDetails">
+                    <h3>Dados do Evento</h3>
+                    <div class="ui-fluid">
+                        <div class="p-field">
+                            <p:outputLabel value="Nome do Evento" />
+                            <p:inputText id="nome" value="#{scheduleJava8View.evento.nome}" disabled="true" />
+                        </div>
+
+                        <div class="p-field">
+                            <p:outputLabel value="Descrição do Evento" />
+                            <p:inputTextarea id="descricao" rows="6" cols="33" value="#{scheduleJava8View.evento.descricao}" disabled="true"/>
+                        </div>
+
+                        <div class="p-field">
+                            <p:outputLabel value="Data de Início" />
+                            <p:calendar id="dataInicio" value="#{scheduleJava8View.evento.dataInicio}" pattern="dd/MM/yyyy" navigator="true" mask="99/99/9999" showOn="button" disabled="true" />
+                        </div>
+
+                        <div class="p-field">
+                            <p:outputLabel value="Data de Término" />
+                            <p:calendar id="dataFim" value="#{scheduleJava8View.evento.dataFim}" pattern="dd/MM/yyyy" navigator="true" mask="99/99/9999" showOn="button" disabled="true"/>
+                        </div>
+
+                        <div class="p-field">
+                            <p:outputLabel value="Local do evento" />
+                            <p:inputText id="localEvento" value="#{scheduleJava8View.evento.localEvento}" disabled="true"/>
+                        </div>
+
+                        <div class="p-field">
+                            <p:outputLabel value="Local de inscrição" />
+                            <p:inputText id="local" value="#{scheduleJava8View.evento.localInscricao}" disabled="true"/>
+                        </div>
+
+                        <div class="p-field">
+                            <p:outputLabel value="Público Alvo" />
+                            <p:inputText id="publicoAlvo" value="#{scheduleJava8View.evento.publicoAlvo}" disabled="true"/>
+                        </div>
+
+                        <div class="p-field">
+                            <p:outputLabel value="Valor de Investimento" />
+                            <p:inputText id="valorInvestimento" value="#{scheduleJava8View.evento.valorInvestimento}" disabled="true"/>
+                        </div>                                
+                    </div>
+                </h:form>
+            </p:dialog>    
 </html>
 

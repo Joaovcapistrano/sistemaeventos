@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Lista de Eventos</title>
+    </h:head>
+    <h:body>
+         <h:form>            
+            <h:column>
+                <p:commandButton value="Voltar" id="voltar" action="index" style="margin-right:20px;" ajax="false" />
+            </h:column>
+            <h:column>
+                <p:commandButton value="Cadastrar" id="cad" action="#{guiEvento.cadastrar()}" style="margin-right:20px;" ajax="false" />
+            </h:column>
+        </h:form>
+        <p:dataTable id="eventData" var="evento" value="#{guiEvento.eventos}">
+            <p:column headerText="ID">
+                <h:outputLabel value="#{evento.id}" />
+            </p:column>
+
+            <p:column headerText="Nome">
+                <h:outputLabel value="#{evento.nome}" />
+            </p:column>
+
+            <p:column headerText="Data Início">
+                <h:outputLabel value="#{evento.dataInicio}" converter="localDateFacesConverter" />
+            </p:column>
+
+            <p:column headerText="Mais detalhes" style="text-align: center">
+      
+                <p:commandButton value="Ver Mais" id="details" oncomplete="PF('ver').show()" style="margin-right:20px;" update="verDetalhes">
+                    <f:setPropertyActionListener value="#{evento}" target="#{guiEvento.evento}"/>
+                </p:commandButton>
+            </p:column>
+        </p:dataTable>
+    </h:body>
+    
+    <p:dialog id="verDetalhes" dynamic="true" header="Detalhes do Evento" widgetVar="ver" modal="true" height="525" width="750">
+        <h:form >
+            <h3>Dados do Evento</h3>
+            <div class="ui-fluid">
+                <div class="p-field">
+                    <p:outputLabel value="Nome do Evento" />
+                    <p:inputText id="nome" value="#{guiEvento.evento.nome}" disabled="true" />
+                </div>
+                
+                <div class="p-field">
+                    <p:outputLabel value="Descrição do Evento" />
+                    <p:inputTextarea id="descricao" rows="6" cols="33" value="#{guiEvento.evento.descricao}" disabled="true"/>
+                </div>
+                
+                <div class="p-field">
+                    <p:outputLabel value="Data de Início" />
+                    <p:calendar id="dataInicio" value="#{guiEvento.evento.dataInicio}" pattern="dd/MM/yyyy" navigator="true" mask="99/99/9999" showOn="button" disabled="true" />
+                </div>
+                
+                <div class="p-field">
+                    <p:outputLabel value="Data de Término" />
+                    <p:calendar id="dataFim" value="#{guiEvento.evento.dataFim}" pattern="dd/MM/yyyy" navigator="true" mask="99/99/9999" showOn="button" disabled="true"/>
+                </div>
+                                              
+                <div class="p-field">
+                    <p:outputLabel value="Local do evento" />
+                    <p:inputText id="localEvento" value="#{guiEvento.evento.localEvento}" disabled="true"/>
+                </div>
+                
+                <div class="p-field">
+                    <p:outputLabel value="Local de inscrição" />
+                    <p:inputText id="local" value="#{guiEvento.evento.localInscricao}" disabled="true"/>
+                </div>
+                                             
+                <div class="p-field">
+                    <p:outputLabel value="Público Alvo" />
+                    <p:inputText id="publicoAlvo" value="#{guiEvento.evento.publicoAlvo}" disabled="true"/>
+                </div>
+                
+                <div class="p-field">
+                    <p:outputLabel value="Valor de Investimento" />
+                    <p:inputText id="valorInvestimento" value="#{guiEvento.evento.valorInvestimento}" disabled="true"/>
+                </div>                                
+              </div>
+        </h:form>
+    </p:dialog>
+</html>
+

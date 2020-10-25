@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Cadastro do Evento</title>
+    </h:head>
+    <h:body>
+        <h:form>
+        <h3>Dados Cadastrais</h3>
+            <div class="ui-fluid">
+                <div class="p-field">
+                    <p:outputLabel value="Nome do Evento" />
+                    <p:inputText id="nome" value="#{guiEvento.evento.nome}" />
+                </div>
+                
+                <div class="p-field">
+                    <p:outputLabel value="Descrição do Evento" />
+                    <p:inputTextarea id="descricao" rows="6" cols="33" value="#{guiEvento.evento.descricao}" />
+                </div>
+                
+                <div class="p-field">
+                    <p:outputLabel value="Data de Início" />
+                    <p:calendar id="dataInicio" value="#{guiEvento.evento.dataInicio}" pattern="dd/MM/yyyy" navigator="true" mask="99/99/9999" showOn="button" />
+                </div>
+                
+                <div class="p-field">
+                    <p:outputLabel value="Data de Término" />
+                    <p:calendar id="dataFim" value="#{guiEvento.evento.dataFim}" pattern="dd/MM/yyyy" navigator="true" mask="99/99/9999" showOn="button" />
+                </div>
+                                              
+                <div class="p-field">
+                    <p:outputLabel value="Local do evento" />
+                    <p:inputText id="localEvento" value="#{guiEvento.evento.localEvento}" />
+                </div>
+                
+                <div class="p-field">
+                    <p:outputLabel value="Local de inscrição" />
+                    <p:inputText id="local" value="#{guiEvento.evento.localInscricao}" />
+                </div>
+                                             
+                <div class="p-field">
+                    <p:outputLabel value="Público Alvo" />
+                    <p:inputText id="publicoAlvo" value="#{guiEvento.evento.publicoAlvo}" />
+                </div>
+                
+                <div class="p-field">
+                    <p:outputLabel value="Valor de Investimento" />
+                    <p:inputText id="valorInvestimento" value="#{guiEvento.evento.valorInvestimento}" />
+                </div>
+                                
+                <div class="p-field">
+                   <p:commandButton value="Gravar" id="gravar" action="#{guiEvento.gravar()}" style="margin-right:20px;" ajax="false" />
+                </div>
+ 
+            </div>
+        </h:form>
+    </h:body>
+</html>
+
