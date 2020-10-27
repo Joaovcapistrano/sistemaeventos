@@ -8,7 +8,9 @@
     <h:head>
         <title>Pagina Inicial</title>
     </h:head>
+    
     <h:body>
+        
         <h:form>
             <p:commandButton value="Usuários" id="users" action="#{guiUsuario.inicializarLista()}" style="margin-right:20px;" ajax="false" />
             <p:commandButton value="Grupos" id="grupos" action="#{guiGrupo.inicializarLista()}" style="margin-right:20px;" ajax="false" />
@@ -25,10 +27,16 @@
 
     </h:body>
     
+    
+    <!-- Desabilitado devido à erro de ponteiro nulo vindo da ação onEventSelect -->
     <p:dialog widgetVar="eventDialog" header="Detalhes do Evento" showEffect="clip" hideEffect="clip">
+        
                 <h:form id="eventDetails">
+                    
                     <h3>Dados do Evento</h3>
+                    
                     <div class="ui-fluid">
+                        
                         <div class="p-field">
                             <p:outputLabel value="Nome do Evento" />
                             <p:inputText id="nome" value="#{scheduleJava8View.evento.nome}" disabled="true" />
@@ -67,9 +75,13 @@
                         <div class="p-field">
                             <p:outputLabel value="Valor de Investimento" />
                             <p:inputText id="valorInvestimento" value="#{scheduleJava8View.evento.valorInvestimento}" disabled="true"/>
-                        </div>                                
+                        </div>   
+                        
                     </div>
+                    
                 </h:form>
-            </p:dialog>    
+        
+            </p:dialog>   
+    
 </html>
 

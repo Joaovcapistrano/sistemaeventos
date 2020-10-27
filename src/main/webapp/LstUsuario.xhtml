@@ -7,15 +7,21 @@
     <h:head>
         <title>Lista de Usuarios</title>
     </h:head>
+    
     <h:body>
-        <h:form>            
+        
+        <h:form>         
+            
             <h:column>
                 <p:commandButton value="Voltar" id="voltar" action="index" style="margin-right:20px;" ajax="false" />
             </h:column>
+            
             <h:column>
                 <p:commandButton value="Cadastrar" id="cad" action="#{guiUsuario.cadastrar()}" style="margin-right:20px;" ajax="false" />
             </h:column>
+            
         </h:form>
+        
         <p:dataTable id="userData" var="user" value="#{guiUsuario.usuarios}">
             <p:column headerText="ID">
                 <h:outputLabel value="#{user.id}" />
@@ -34,12 +40,15 @@
                 <p:commandButton value="Ver Mais" id="details" oncomplete="PF('ver').show()" style="margin-right:20px;" update="verDetalhes">
                     <f:setPropertyActionListener value="#{user}" target="#{guiUsuario.user}"/>
                 </p:commandButton>
+                
             </p:column>
         </p:dataTable>
+        
     </h:body>
     
     <p:dialog id="verDetalhes" dynamic="true" header="Detalhes do Usuário" widgetVar="ver" modal="true" height="525" width="750">
                             <h:form >
+                                
                             <h3>Dados Cadastrais</h3>
                                 <div id="detalhesForm" class="ui-fluid">
                                     <div id="divNome" class="p-field">
@@ -102,7 +111,9 @@
                                     </div>
 
                                 </div>
+                            
                             </h:form>                                          
     </p:dialog>
+    
 </html>
 

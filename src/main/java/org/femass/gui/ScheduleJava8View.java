@@ -59,6 +59,9 @@ public class ScheduleJava8View implements Serializable {
         
         event = new DefaultScheduleEvent();
         
+        //Adapta os eventos cadastrados ao formato socilitado pelo 
+        //modelo do calendário/agenda do PrimeFaces.
+              
         eventos = eventoDao.listar();
         for(Evento ev: eventos)
         {
@@ -72,7 +75,11 @@ public class ScheduleJava8View implements Serializable {
                 .build();
             eventModel.addEvent(event);
         }
- 
+        
+        //O resto do código tem como fonte: <<https://www.primefaces.org/showcase/ui/data/schedule/basic.xhtml>>
+        
+        
+        
         
  /*
         event = DefaultScheduleEvent.builder()

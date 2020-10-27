@@ -7,10 +7,15 @@
     <h:head>
         <title>Cadastrar Usuario</title>
     </h:head>
+    
     <h:body>
+        
         <h:form>
+            
         <h3>Dados Cadastrais</h3>
+        
             <div class="ui-fluid">
+                
                 <div class="p-field">
                     <p:outputLabel value="Nome Completo" />
                     <p:inputText id="nome" value="#{guiUsuario.user.nomeCompleto}" />
@@ -37,10 +42,11 @@
                 <div class="p-field">
               
                     <p:commandButton value="Adicionar Telefone" id="addtelefone" onclick="PF('addtel').show()"  style="margin-right:20px;">
-                    <f:actionListener binding="#{guiUsuario.novoTelefone()}" /> 
+                        <f:actionListener binding="#{guiUsuario.novoTelefone()}" /> 
                     </p:commandButton>
                     
                     <p:dialog header="Adicionar Telefone" widgetVar="addtel" modal="true" height="150">
+                        
                         <p:outputLabel value="DDD" />
                         <p:inputText id="ddd" value="#{guiUsuario.telefone.ddd}" />
                         
@@ -48,11 +54,13 @@
                         <p:inputText id="numero" value="#{guiUsuario.telefone.numero}" />
                         
                         <p:commandButton value="Gravar Telefone" id="gravarTel" update="tabelaTel" onclick="PF('addtel').hide()">
-                        <f:actionListener binding="#{guiUsuario.user.adicionarTelefones(guiUsuario.telefone)}" /> 
+                            <f:actionListener binding="#{guiUsuario.user.adicionarTelefones(guiUsuario.telefone)}" /> 
                         </p:commandButton>
+                        
                     </p:dialog>    
                
                     <p:dataTable id="tabelaTel" var="telefone" value="#{guiUsuario.user.telefones}">
+                        
                         <p:column headerText="DDD">
                             <p:outputLabel value="#{telefone.ddd}" />
                         </p:column>
@@ -87,7 +95,10 @@
                 </div>
  
             </div>
+        
         </h:form>
+        
     </h:body>
+    
 </html>
 

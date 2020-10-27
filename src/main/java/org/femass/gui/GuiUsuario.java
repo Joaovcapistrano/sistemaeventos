@@ -66,10 +66,6 @@ public class GuiUsuario implements Serializable {
         {
             usuarioDao.alterar(user);
         }
-//        for(Telefone tel: user.getTelefones())
-//        {
-//            telefoneDao.gravar(tel);
-//        }  
         return inicializarLista();
     }
     

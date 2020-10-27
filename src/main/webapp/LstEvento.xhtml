@@ -7,16 +7,23 @@
     <h:head>
         <title>Lista de Eventos</title>
     </h:head>
+    
     <h:body>
+        
          <h:form>            
+             
             <h:column>
                 <p:commandButton value="Voltar" id="voltar" action="index" style="margin-right:20px;" ajax="false" />
             </h:column>
+             
             <h:column>
                 <p:commandButton value="Cadastrar" id="cad" action="#{guiEvento.cadastrar()}" style="margin-right:20px;" ajax="false" />
             </h:column>
+             
         </h:form>
+        
         <p:dataTable id="eventData" var="evento" value="#{guiEvento.eventos}">
+            
             <p:column headerText="ID">
                 <h:outputLabel value="#{evento.id}" />
             </p:column>
@@ -35,13 +42,18 @@
                     <f:setPropertyActionListener value="#{evento}" target="#{guiEvento.evento}"/>
                 </p:commandButton>
             </p:column>
+            
         </p:dataTable>
+        
     </h:body>
     
     <p:dialog id="verDetalhes" dynamic="true" header="Detalhes do Evento" widgetVar="ver" modal="true" height="525" width="750">
         <h:form >
+            
             <h3>Dados do Evento</h3>
+            
             <div class="ui-fluid">
+                
                 <div class="p-field">
                     <p:outputLabel value="Nome do Evento" />
                     <p:inputText id="nome" value="#{guiEvento.evento.nome}" disabled="true" />
@@ -80,9 +92,13 @@
                 <div class="p-field">
                     <p:outputLabel value="Valor de Investimento" />
                     <p:inputText id="valorInvestimento" value="#{guiEvento.evento.valorInvestimento}" disabled="true"/>
-                </div>                                
+                </div>   
+                
               </div>
+            
         </h:form>
+        
     </p:dialog>
+    
 </html>
 

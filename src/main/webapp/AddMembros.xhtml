@@ -7,33 +7,51 @@
     <h:head>
         <title>Gerenciamento de membros</title>
     </h:head>
+    
     <h:body>
+        
         <h:form>
+            
             <p:growl id="growl" showDetail="true" sticky="true" />
+            
             <h3>Gerenciamento de membros</h3>
+            
             <p:outputLabel value="#{guiGrupo.grupo.nome}" />
             <p:panelGrid columns="3">
+                
                 <p:outputLabel value="Usuário" />
                 <p:selectOneMenu value="#{guiGrupo.idMembro}" style="width:400px">
                     <f:selectItem itemLabel="Nenhum usuário selecionado" itemValue="#{null}" noSelectionOption="true"/>
                     <f:selectItems value="#{guiGrupo.usuarios}" var="u" itemLabel="#{u.nomeCompleto}" itemValue="#{u.id}" />
                 </p:selectOneMenu>
+                
                 <p:commandButton value="Adicionar" action="#{guiGrupo.adicionarMembro()}" ajax="false" />
+            
             </p:panelGrid>
+            
             <h3>Lista de membros</h3>
+            
             <p:dataTable value="#{guiGrupo.grupo.membros}" var="m">
+                
                 <p:column headerText="ID" style="width:18px">
                     <p:outputLabel value="#{m.id}" />
                 </p:column>
+                
                 <p:column headerText="Nome">
                     <p:outputLabel value="#{m.nomeCompleto}" />
                 </p:column>
+                
                 <p:column headerText="Mais detalhes" style="text-align: center">
                     <p:commandButton value="Remover" id="remover" action="#{guiGrupo.removerMembro(m)}" ajax="false" />
                 </p:column>
+                
             </p:dataTable>
+            
             <p:commandButton value="Voltar" action="#{guiGrupo.inicializarLista()}" ajax="false" /> 
+        
         </h:form>
+        
     </h:body>
+    
 </html>
 
