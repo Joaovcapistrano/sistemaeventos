@@ -94,6 +94,14 @@
                     <p:inputText id="valorInvestimento" value="#{guiEvento.evento.valorInvestimento}" disabled="true"/>
                 </div>   
                 
+                <div id="divAlterar" class="p-field">
+                    <p:commandButton value="Alterar" id="alterar" action="CadEvento"  style="margin-right:20px;" ajax="false" />                                                                            
+                </div>
+                                    
+                <div id="divExcluir" class="p-field">
+                    <p:commandButton value="Excluir" id="excluir" action="#{guiEvento.excluir()}"  style="margin-right:20px;" ajax="false" />                                                                            
+                </div>
+                
               </div>
             
         </h:form>

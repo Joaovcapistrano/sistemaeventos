@@ -28,7 +28,7 @@ public class EventoDao {
     }
     
     public void deletar(Evento evento){
-        em.remove(evento);
+        em.remove(em.merge(evento));
     }
     
     public List<Evento> listar(){

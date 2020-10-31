@@ -42,13 +42,23 @@ public class GuiEvento implements Serializable {
     }
     
     public String gravar(){
-        eventoDao.gravar(evento);
+        if(evento.getId()==null){
+            eventoDao.gravar(evento);
+        }
+        else{
+            eventoDao.alterar(evento);
+        }
         return inicializarLista();
     }
     
     public String cadastrar(){
         evento = new Evento();
         return "CadEvento";
+    }
+    
+    public String excluir(){
+        eventoDao.deletar(evento);
+        return inicializarLista();
     }
 
     public EventoDao getEventoDao() {
