@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -18,6 +19,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import org.femass.dao.TelefoneDao;
 
 @Entity
 public class Usuario implements Serializable {
@@ -44,6 +46,7 @@ public class Usuario implements Serializable {
     
     @Enumerated(EnumType.STRING)
     private NivelAcesso nivelAcesso;
+    
 
     public Long getId() {
         return id;

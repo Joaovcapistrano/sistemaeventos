@@ -23,7 +23,7 @@ public class Telefone implements Serializable {
     private String ddd;
     private String numero;
     
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.ALL)
     private Usuario usuario;
 
     public Telefone(){

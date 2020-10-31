@@ -40,6 +40,8 @@ public class GuiUsuario implements Serializable {
     
     private Telefone telefone = new Telefone();
     
+    private Telefone telefoneSelecionado = new Telefone();
+    
     private Boolean ativo=true;
         
     public GuiUsuario() {
@@ -91,6 +93,15 @@ public class GuiUsuario implements Serializable {
         telefone.setUsuario(user);
     }
     
+    public Telefone getTelefoneSelecionado(){
+        return telefoneSelecionado;
+    }
+
+    public void setTelefoneSelecionado(Telefone telefoneSelecionado) {
+        this.telefoneSelecionado = telefoneSelecionado;
+    }
+    
+    
     public Telefone getTelefone() {
         return telefone;
     }
@@ -105,6 +116,11 @@ public class GuiUsuario implements Serializable {
 
     public Boolean getAtivo() {
         return ativo;
+    }
+    
+    public void removerTelefones(){
+        user.removerTelefones(telefoneSelecionado);
+        
     }
 
     public void setAtivo(Boolean ativado) {

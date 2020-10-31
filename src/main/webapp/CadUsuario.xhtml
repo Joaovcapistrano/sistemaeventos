@@ -39,23 +39,28 @@
                     <p:inputText id="endereco" value="#{guiUsuario.user.endereco}" />
                 </div>
                 
+                
+                
                 <div class="p-field">
               
-                    <p:commandButton value="Adicionar Telefone" id="addtelefone" onclick="PF('addtel').show()"  style="margin-right:20px;">
+                    <p:commandButton value="Adicionar Telefone" id="addtelefone" oncomplete="PF('addtel').show()"  style="margin-right:20px;">
                         <f:actionListener binding="#{guiUsuario.novoTelefone()}" /> 
                     </p:commandButton>
                     
-                    <p:dialog header="Adicionar Telefone" widgetVar="addtel" modal="true" height="150">
+                    
+                    
+                    <p:dialog id="dialogTel" header="Adicionar Telefone" dynamic="true" widgetVar="addtel" modal="true" height="150">
                         
                         <p:outputLabel value="DDD" />
-                        <p:inputText id="ddd" value="#{guiUsuario.telefone.ddd}" />
+                        <p:inputMask id="ddd" value="#{guiUsuario.telefone.ddd}" mask="(99)"/>
                         
                         <p:outputLabel value="Número" />
-                        <p:inputText id="numero" value="#{guiUsuario.telefone.numero}" />
+                        <p:inputMask id="numero" value="#{guiUsuario.telefone.numero}" mask="9 9999-9999"/>
                         
-                        <p:commandButton value="Gravar Telefone" id="gravarTel" update="tabelaTel" onclick="PF('addtel').hide()">
+                        <p:commandButton value="Gravar Telefone" id="gravarTel" update="tabelaTel, dialogTel" onclick="PF('addtel').hide()">
                             <f:actionListener binding="#{guiUsuario.user.adicionarTelefones(guiUsuario.telefone)}" /> 
                         </p:commandButton>
+                         
                         
                     </p:dialog>    
                
@@ -68,6 +73,12 @@
                         <p:column headerText="Número">
                             <p:outputLabel value="#{telefone.numero}" />
                         </p:column>
+                        
+                        <p:column headerText="Excluir">
+                            <p:commandButton value="X" id="excluirTel" update="tabelaTel" action="#{guiUsuario.removerTelefones}" >
+                                <f:setPropertyActionListener value="#{telefone}" target="#{guiUsuario.telefoneSelecionado}" /> 
+                            </p:commandButton>
+                        </p:column> 
                         
                     </p:dataTable>
                       

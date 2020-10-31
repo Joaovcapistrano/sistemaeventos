@@ -28,7 +28,7 @@ public class TelefoneDao {
     }
     
     public void deletar(Telefone telefone){
-        em.remove(telefone);
+        em.remove(em.merge(telefone));
     }
     
     
