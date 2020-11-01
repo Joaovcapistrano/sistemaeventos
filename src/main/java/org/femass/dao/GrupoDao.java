@@ -28,7 +28,7 @@ public class GrupoDao {
     }
     
     public void deletar(GrupoTrabalho grupo){
-        em.remove(grupo);
+        em.remove(em.merge(grupo));
     }
     
     public List<GrupoTrabalho> listar()

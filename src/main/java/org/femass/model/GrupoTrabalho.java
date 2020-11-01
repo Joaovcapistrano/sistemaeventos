@@ -8,6 +8,7 @@ package org.femass.model;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -34,7 +35,7 @@ public class GrupoTrabalho implements Serializable {
     @OneToOne
     private Usuario lider;
   
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private List<Usuario> membros;
 
     public Long getId() {

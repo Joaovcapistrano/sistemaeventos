@@ -29,67 +29,75 @@ public class GuiGrupo implements Serializable {
     /**
      * Creates a new instance of GuiGrupo
      */
-    
     @EJB
     GrupoDao grupodao;
-    
+
     @EJB
     UsuarioDao usuariodao;
-    
+
     private GrupoTrabalho grupo;
     private Usuario lider;
     private long idLider;
     private long idMembro;
     private GrupoTrabalho grupoSelecionado;
     private boolean alterando;
-    
+
     private List<GrupoTrabalho> grupos;
     private List<Usuario> usuarios;
-    
+
     public GuiGrupo() {
     }
-    
-    public String inicializarLista(){
+
+    public String inicializarLista() {
         grupos = grupodao.listar();
         usuarios = usuariodao.listar();
         return "LstGrupos";
     }
-    
-    public String cadastrar(){
+
+    public String cadastrar() {
         grupo = new GrupoTrabalho();
-        alterando=false;
+        alterando = false;
         return "CadGrupo";
     }
-    
+
     public String alterar(GrupoTrabalho _grupo) {
         this.grupo = _grupo;
-        if(grupo.getLider()!=null){
-            this.idLider=grupo.getLider().getId();
+        if (grupo.getLider() != null) {
+            this.idLider = grupo.getLider().getId();
         }
         //this.idLider = grupo.getLider().getId();
         alterando = true;
         return "CadGrupo";
     }
-    
-    public String gravar(){
-        for(Usuario u:usuarios){
-            if(u.getId().equals(idLider)){
+
+    public String gravar() {
+        for (Usuario u : usuarios) {
+            if (u.getId().equals(idLider)) {
                 grupo.setLider(u);
             }
         }
-        if (alterando==false) {
+        if (alterando == false) {
             grupodao.gravar(grupo);
         } else {
             grupodao.alterar(grupo);
         }
         return inicializarLista();
     }
-    
-    public List<GrupoTrabalho> getGrupos(){
+
+    public String excluir(GrupoTrabalho _grupo) {
+        this.grupo = _grupo;
+        for (Usuario u : grupo.getMembros()) {
+            u.setGrupoTrabalho(null);
+        }
+        grupodao.deletar(grupo);
+        return inicializarLista();
+    }
+
+    public List<GrupoTrabalho> getGrupos() {
         return grupos;
     }
-    
-    public GrupoTrabalho getGrupo(){
+
+    public GrupoTrabalho getGrupo() {
         return grupo;
     }
 
@@ -128,21 +136,21 @@ public class GuiGrupo implements Serializable {
     public void setIdMembro(long idMembro) {
         this.idMembro = idMembro;
     }
-    
-    public String gerenciarMembro(GrupoTrabalho _grupo){
+
+    public String gerenciarMembro(GrupoTrabalho _grupo) {
         grupo = _grupo;
         return "AddMembros";
     }
-    
-    public String adicionarMembro(){
-        for(Usuario u:usuarios){
-            if(u.getId().equals(idMembro)){
-                if(u.getGrupoTrabalho()==null){
+
+    public String adicionarMembro() {
+        for (Usuario u : usuarios) {
+            if (u.getId().equals(idMembro)) {
+                if (u.getGrupoTrabalho() == null) {
                     grupo.adicionarMembros(u);
                     u.setGrupoTrabalho(grupo);
                     usuariodao.alterar(u);
                     grupodao.alterar(grupo);
-                }else{
+                } else {
                     FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Usuário já está em um grupo"));
                     return null;
                 }
@@ -150,8 +158,8 @@ public class GuiGrupo implements Serializable {
         }
         return "AddMembros";
     }
-    
-    public String removerMembro(Usuario _membro){
+
+    public String removerMembro(Usuario _membro) {
         grupo.removerMembros(_membro);
         _membro.setGrupoTrabalho(null);
         grupodao.alterar(grupo);
@@ -160,4 +168,3 @@ public class GuiGrupo implements Serializable {
     }
 
 }
-
