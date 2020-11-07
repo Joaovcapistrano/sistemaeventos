@@ -71,11 +71,11 @@ public class GuiGrupo implements Serializable {
     }
 
     public String gravar() {
-        for (Usuario u : usuarios) {
+        /*for (Usuario u : usuarios) {
             if (u.getId().equals(idLider)) {
                 grupo.setLider(u);
             }
-        }
+        }*/
         if (alterando == false) {
             grupodao.gravar(grupo);
         } else {
@@ -138,7 +138,10 @@ public class GuiGrupo implements Serializable {
     }
 
     public String gerenciarMembro(GrupoTrabalho _grupo) {
-        grupo = _grupo;
+        this.grupo = _grupo;
+        if (grupo.getLider() != null) {
+            this.idLider = grupo.getLider().getId();
+        }
         return "AddMembros";
     }
 
@@ -164,6 +167,16 @@ public class GuiGrupo implements Serializable {
         _membro.setGrupoTrabalho(null);
         grupodao.alterar(grupo);
         usuariodao.alterar(_membro);
+        return "AddMembros";
+    }
+    
+    public String selecionarLider(){
+        for (Usuario u : usuarios) {
+            if (u.getId().equals(idLider)) {
+                grupo.setLider(u);
+            }
+        }
+        grupodao.alterar(grupo);
         return "AddMembros";
     }
 

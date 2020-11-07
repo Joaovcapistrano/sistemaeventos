@@ -10,6 +10,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import org.femass.model.GrupoTrabalho;
 import org.femass.model.Usuario;
 
 
@@ -36,7 +37,7 @@ public class UsuarioDao {
         Query q = em.createQuery("select u from Usuario u order by u.nomeCompleto");
         return q.getResultList();
     }
-    
+
     public List<Usuario> buscarID(String id)
     {
         Query q = em.createQuery("select u from Usuario u where u.id = :i");
