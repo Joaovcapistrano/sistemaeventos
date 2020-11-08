@@ -9,93 +9,97 @@
     </h:head>
     <h:body>
         <h:form>
-            
+
             <h:column>
                 <p:commandButton value="Voltar" id="voltar" action="index" style="margin-right:20px;" ajax="false" />
             </h:column>
-            
+
             <h:column>
-                <p:commandButton value="Cadastrar" action="#{guiGrupo.cadastrar()}" ajax="false" icon="fa fa-align-justify" />
+                <p:commandButton value="Cadastrar" action="#{guiGrupo.cadastrar()}" style="margin-right:20px;" ajax="false" icon="fa fa-align-justify" />
             </h:column>
-            
+
+            <h:column>
+                <p:commandButton value="Sortear todos" action="#{guiGrupo.sortearTodosGrupos()}" ajax="false" icon="fa fa-align-justify" />
+            </h:column>
+
             <p:dataTable value="#{guiGrupo.grupos}" var="gr">
-                
+
                 <p:column headerText="ID" style="width:13px">
                     <p:outputLabel value="#{gr.id}" />
                 </p:column>
-                
+
                 <p:column headerText="Nome" style="width:300px">
                     <p:outputLabel value="#{gr.nome}" />
                 </p:column>
-                
+
                 <p:column headerText="Data de criação" style="width:100px">
                     <p:outputLabel value="#{gr.dataCriacao}" converter="localDateFacesConverter" />
                 </p:column>
-                
+
                 <p:column headerText="Data de renovação" style="width:100px">
                     <p:outputLabel value="#{gr.dataRenovacao}" converter="localDateFacesConverter" />
                 </p:column>
-                
+
                 <p:column headerText="Líder" style="width:300px">
                     <p:outputLabel value="#{gr.lider.nomeCompleto}" />
                 </p:column>
-                
+
                 <p:column headerText="Mais detalhes" style="text-align: center">
                     <p:commandButton value="Ver Mais" id="details" oncomplete="PF('ver').show()" update="verDetalhes">
                         <f:setPropertyActionListener value="#{gr}" target="#{guiGrupo.grupoSelecionado}"/>
                     </p:commandButton>
                     <p:commandButton value="Membros" id="membros" action="#{guiGrupo.gerenciarMembro(gr)}"  />
                 </p:column>
-                
+
             </p:dataTable>
-            
+
         </h:form>
-        
+
     </h:body>
 
     <p:dialog id="verDetalhes" dynamic="true" header="Detalhes do Grupo" widgetVar="ver" modal="true" height="525" width="750">
         <h:form>
-            
+
             <h3>Detalhes do grupo</h3>
             <p:panelGrid columns="2">
-                
+
                 <p:outputLabel value="Nome" />
                 <p:inputText value="#{guiGrupo.grupoSelecionado.nome}" disabled="true" style="width:400px"/>
-                
+
                 <p:outputLabel value="Descrição" />
                 <p:inputText value="#{guiGrupo.grupoSelecionado.descricao}" disabled="true" style="width:400px"/>
-                
+
                 <p:outputLabel value="Data de criação" />
                 <p:inputText value="#{guiGrupo.grupoSelecionado.dataCriacao}" converter="localDateFacesConverter" disabled="true" style="width:400px"/>
-               
+
                 <p:outputLabel value="Data de renovação" />
                 <p:inputText value="#{guiGrupo.grupoSelecionado.dataRenovacao}" converter="localDateFacesConverter" disabled="true" style="width:400px"/>
-                
+
                 <p:outputLabel value="Líder" />
                 <p:inputText value="#{guiGrupo.grupoSelecionado.lider.nomeCompleto}" disabled="true" style="width:400px" />
-            
+
             </p:panelGrid>
-            
+
             <h3>Lista de membros</h3>
-            
+
             <p:dataTable value="#{guiGrupo.grupoSelecionado.membros}" var="m">
-                
+
                 <p:column headerText="ID" style="width:18px">
                     <p:outputLabel value="#{m.id}" />
                 </p:column>
-                
+
                 <p:column headerText="Nome">
                     <p:outputLabel value="#{m.nomeCompleto}" />
                 </p:column>
-                
+
             </p:dataTable>
-            
+
             <p:commandButton  value="Alterar" id="cmdAlterar" action="#{guiGrupo.alterar(guiGrupo.grupoSelecionado)}" ajax="false" />
             <p:commandButton value="Excluir" id="cmdExcluir" action="#{guiGrupo.excluir(guiGrupo.grupoSelecionado)}" ajax="false" />
-            
+
         </h:form>
-    
+
     </p:dialog>
-    
+
 </html>
 

@@ -9,6 +9,7 @@ import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -165,12 +166,33 @@ public class GuiGrupo implements Serializable {
     public String removerMembro(Usuario _membro) {
         grupo.removerMembros(_membro);
         _membro.setGrupoTrabalho(null);
+        if (grupo.getLider() != null) {
+            if (_membro.getId().equals(grupo.getLider().getId())) {
+                grupo.setLider(null);
+            }
+        }
         grupodao.alterar(grupo);
         usuariodao.alterar(_membro);
         return "AddMembros";
     }
-    
-    public String selecionarLider(){
+
+    public String removerTodosMembros() {
+        for (Usuario m : grupo.getMembros()) {
+            if (grupo.getLider() != null) {
+                if (m.getId().equals(grupo.getLider().getId())) {
+                    grupo.setLider(null);
+                }
+            }
+            m.setGrupoTrabalho(null);
+            usuariodao.alterar(m);
+        }
+
+        grupo.getMembros().clear();
+        grupodao.alterar(grupo);
+        return "AddMembros";
+    }
+
+    public String selecionarLider() {
         for (Usuario u : usuarios) {
             if (u.getId().equals(idLider)) {
                 grupo.setLider(u);
@@ -178,6 +200,102 @@ public class GuiGrupo implements Serializable {
         }
         grupodao.alterar(grupo);
         return "AddMembros";
+    }
+
+    public String sortearGrupo() {
+        int numgrupos = 0;
+        int numusuarios = 0;
+        int i = 0;
+        grupos = grupodao.listar();
+        usuarios = usuariodao.listar();
+
+        for (GrupoTrabalho g : grupos) {
+            numgrupos++;
+        }
+        for (Usuario u : usuarios) {
+            numusuarios++;
+        }
+
+        //Define o numero médio de membros por grupo
+        int nummembros = numusuarios / numgrupos;
+
+        //Embaralha a lista de usuarios
+        Collections.shuffle(usuarios);
+
+        //Verifica se grupo já tem membros
+        for (Usuario u : grupo.getMembros()) {
+            i++;
+        }
+
+        //Faz o sorteio das vagas disponíveis
+        for (Usuario u : usuarios) {
+            if (u.getGrupoTrabalho() == null && i < nummembros) {
+                grupo.adicionarMembros(u);
+                u.setGrupoTrabalho(grupo);
+                i++;
+            }
+        }
+        
+        grupodao.alterar(grupo);
+        return "AddMembros";
+    }
+
+    public String sortearTodosGrupos() {
+        int numgrupos = 0;
+        int numusuarios = 0;
+        int i = 0;
+        List<Usuario> usuarios2 = usuariodao.listar();
+
+        for (GrupoTrabalho g : grupos) {
+            numgrupos++;
+        }
+        for (Usuario u : usuarios2) {
+            numusuarios++;
+        }
+
+        int nummembros = numusuarios / numgrupos;
+        
+        //Define o número de usuários que sobraram
+        float sobra = numusuarios % numgrupos;
+
+        Collections.shuffle(usuarios2);
+
+        for (GrupoTrabalho g : grupos) {
+            for (Usuario u : g.getMembros()) {
+                i++;
+            }
+            for (Usuario u : usuarios2) {
+                if (u.getGrupoTrabalho() == null && i < nummembros) {
+                    g.adicionarMembros(u);
+                    u.setGrupoTrabalho(g);
+                    i++;
+                }
+            }
+            grupodao.alterar(g);
+            i = 0;
+        }
+
+        //Verifica se sobrou algum usuário e aumenta o número de vagas do grupo 
+        if (sobra != 0) {
+            i = 0;
+            int nummembros2 = (numusuarios / numgrupos) + 1;
+            for (GrupoTrabalho g : grupos) {
+                for (Usuario u : g.getMembros()) {
+                    i++;
+                }
+                for (Usuario u : usuarios2) {
+                    if (u.getGrupoTrabalho() == null && i < nummembros2) {
+                        g.adicionarMembros(u);
+                        u.setGrupoTrabalho(g);
+                        i++;
+                    }
+                }
+                grupodao.alterar(g);
+                i = 0;
+            }
+        }
+
+        return "LstGrupos";
     }
 
 }

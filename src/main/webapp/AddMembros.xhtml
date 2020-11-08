@@ -37,6 +37,11 @@
             
             </p:panelGrid>
             
+            <p:panelGrid columns="2">
+                <p:commandButton value="Sortear grupo" action ="#{guiGrupo.sortearGrupo()}" ajax="false" style="widdth:200px" />
+                <p:commandButton value="Esvaziar grupo" action ="#{guiGrupo.removerTodosMembros()}" ajax="false" style="widdth:200px" />
+            </p:panelGrid>
+            
             <h3>Lista de membros</h3>
             
             <p:dataTable value="#{guiGrupo.grupo.membros}" var="m">
