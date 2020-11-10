@@ -130,6 +130,14 @@ public class Evento implements Serializable {
     public void setLocalInscricao(String localInscricao) {
         this.localInscricao = localInscricao;
     }
+
+    public List<Usuario> getUsuários() {
+        return usuários;
+    }
+
+    public void setUsuários(List<Usuario> usuários) {
+        this.usuários = usuários;
+    }
     
     
     

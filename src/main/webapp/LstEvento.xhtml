@@ -20,6 +20,10 @@
                 <p:commandButton value="Cadastrar" id="cad" action="#{guiEvento.cadastrar()}" style="margin-right:20px;" ajax="false" />
             </h:column>
              
+            <h:column>
+                <p:commandButton value="Autocadastrar aniversários" id="cadAniv" action="#{guiEvento.cadastrarAniversarios()}" style="margin-right:20px;" ajax="false" />
+            </h:column>
+             
         </h:form>
         
         <p:dataTable id="eventData" var="evento" value="#{guiEvento.eventos}">

@@ -35,7 +35,7 @@ public class Usuario implements Serializable {
     private String login;
     private String senha;
     
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true)
     private List<Telefone> telefones = new ArrayList();
     
     @OneToMany

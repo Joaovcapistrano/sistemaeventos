@@ -72,6 +72,14 @@
             <artifactId>font-awesome</artifactId>
             <version>5.14.0</version>
         </dependency>
+        
+        <!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.2.18</version>
+        </dependency>
+
     </dependencies>
     
     <build>

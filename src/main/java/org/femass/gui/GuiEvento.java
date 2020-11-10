@@ -8,10 +8,13 @@ package org.femass.gui;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.List;
 import javax.ejb.EJB;
 import org.femass.dao.EventoDao;
+import org.femass.dao.UsuarioDao;
 import org.femass.model.Evento;
+import org.femass.model.Usuario;
 
 /**
  *
@@ -27,6 +30,9 @@ public class GuiEvento implements Serializable {
     
     @EJB
     EventoDao eventoDao;
+    
+    @EJB
+    UsuarioDao usuarioDao;
     
     private List<Evento> eventos;
     
@@ -58,6 +64,40 @@ public class GuiEvento implements Serializable {
     
     public String excluir(){
         eventoDao.deletar(evento);
+        return inicializarLista();
+    }
+    
+    public String cadastrarAniversarios(){
+        for(Usuario usuario: usuarioDao.listar()){
+            
+            //Verifica se o usuário já tem um aniversário cadastrado, se houver, o evento antigo é deletado
+            for(Evento usuarioAniv: eventoDao.listar()){
+                if(usuarioAniv.getNome().equals("Aniversário de " + usuario.getNomeCompleto()))
+                {
+                    eventoDao.deletar(usuarioAniv);
+                }
+            }
+            Evento ev = new Evento();
+            ev.setNome("Aniversário de " + usuario.getNomeCompleto());
+            ev.setDescricao("Aniversário de " + usuario.getNomeCompleto());
+            
+            //Verifica se a data de aniversário do usuário já passou no ano atual
+            //Caso tenha passado, gera um evento de aniversário no ano seguinte
+            //Caso não tenha passado, gera um evento de aniversário no ano atual
+            if(usuario.getDataNascimento().withYear(LocalDate.now().getYear()).isBefore(LocalDate.now()))
+            {
+                ev.setDataInicio(usuario.getDataNascimento().withYear(LocalDate.now().getYear()).plusYears(1));
+                ev.setDataFim(usuario.getDataNascimento().withYear(LocalDate.now().getYear()).plusYears(1));
+            }
+            else
+            {
+                ev.setDataInicio(usuario.getDataNascimento().withYear(LocalDate.now().getYear()));
+                ev.setDataFim(usuario.getDataNascimento().withYear(LocalDate.now().getYear()));
+            }
+            
+            eventoDao.gravar(ev);
+        }
+        
         return inicializarLista();
     }
 
