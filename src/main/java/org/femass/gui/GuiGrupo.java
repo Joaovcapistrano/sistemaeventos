@@ -245,46 +245,33 @@ public class GuiGrupo implements Serializable {
         int numusuarios = 0;
         int i = 0;
         List<Usuario> usuarios2 = usuariodao.listar();
-
-        for (GrupoTrabalho g : grupos) {
-            numgrupos++;
-        }
-        for (Usuario u : usuarios2) {
-            numusuarios++;
-        }
-
-        int nummembros = numusuarios / numgrupos;
         
-        //Define o número de usuários que sobraram
-        float sobra = numusuarios % numgrupos;
-
-        Collections.shuffle(usuarios2);
-
-        for (GrupoTrabalho g : grupos) {
-            for (Usuario u : g.getMembros()) {
-                i++;
+        if(grupos.isEmpty()){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Não há grupos"));
+            return null;
+        }
+        else{
+            
+            for (GrupoTrabalho g : grupos) {
+                numgrupos++;
             }
             for (Usuario u : usuarios2) {
-                if (u.getGrupoTrabalho() == null && i < nummembros) {
-                    g.adicionarMembros(u);
-                    u.setGrupoTrabalho(g);
-                    i++;
-                }
+                numusuarios++;
             }
-            grupodao.alterar(g);
-            i = 0;
-        }
 
-        //Verifica se sobrou algum usuário e aumenta o número de vagas do grupo 
-        if (sobra != 0) {
-            i = 0;
-            int nummembros2 = (numusuarios / numgrupos) + 1;
+            int nummembros = numusuarios / numgrupos;
+
+            //Define o número de usuários que sobraram
+            float sobra = numusuarios % numgrupos;
+
+            Collections.shuffle(usuarios2);
+
             for (GrupoTrabalho g : grupos) {
                 for (Usuario u : g.getMembros()) {
                     i++;
                 }
                 for (Usuario u : usuarios2) {
-                    if (u.getGrupoTrabalho() == null && i < nummembros2) {
+                    if (u.getGrupoTrabalho() == null && i < nummembros) {
                         g.adicionarMembros(u);
                         u.setGrupoTrabalho(g);
                         i++;
@@ -293,8 +280,28 @@ public class GuiGrupo implements Serializable {
                 grupodao.alterar(g);
                 i = 0;
             }
-        }
 
+            //Verifica se sobrou algum usuário e aumenta o número de vagas do grupo 
+            if (sobra != 0) {
+                i = 0;
+                int nummembros2 = (numusuarios / numgrupos) + 1;
+                for (GrupoTrabalho g : grupos) {
+                    for (Usuario u : g.getMembros()) {
+                        i++;
+                    }
+                    for (Usuario u : usuarios2) {
+                        if (u.getGrupoTrabalho() == null && i < nummembros2) {
+                            g.adicionarMembros(u);
+                            u.setGrupoTrabalho(g);
+                            i++;
+                        }
+                    }
+                    grupodao.alterar(g);
+                    i = 0;
+                }
+            }
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Sorteio realizado"));
+        }
         return "LstGrupos";
     }
 
