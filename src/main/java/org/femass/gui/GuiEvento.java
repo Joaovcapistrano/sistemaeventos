@@ -36,6 +36,8 @@ public class GuiEvento implements Serializable {
     
     private List<Evento> eventos;
     
+    private Integer ano = LocalDate.now().getYear();
+    
     private Evento evento;
     
     public GuiEvento() {
@@ -70,9 +72,9 @@ public class GuiEvento implements Serializable {
     public String cadastrarAniversarios(){
         for(Usuario usuario: usuarioDao.listar()){
             
-            //Verifica se o usuário já tem um aniversário cadastrado, se houver, o evento antigo é deletado
+            //Verifica se o usuário já tem um aniversário do usuário cadastrado naquele ano, se houver, o evento antigo é deletado
             for(Evento usuarioAniv: eventoDao.listar()){
-                if(usuarioAniv.getNome().equals("Aniversário de " + usuario.getNomeCompleto()))
+                if(usuarioAniv.getNome().equals("Aniversário de " + usuario.getNomeCompleto())/* &&  usuarioAniv.getDataInicio().getYear()==ano*/)
                 {
                     eventoDao.deletar(usuarioAniv);
                 }
@@ -81,6 +83,10 @@ public class GuiEvento implements Serializable {
             ev.setNome("Aniversário de " + usuario.getNomeCompleto());
             ev.setDescricao("Aniversário de " + usuario.getNomeCompleto());
             
+            
+//            ev.setDataInicio(usuario.getDataNascimento().withYear(ano));
+//            ev.setDataFim(usuario.getDataNascimento().withYear(ano));
+                        
             //Verifica se a data de aniversário do usuário já passou no ano atual
             //Caso tenha passado, gera um evento de aniversário no ano seguinte
             //Caso não tenha passado, gera um evento de aniversário no ano atual
@@ -109,6 +115,16 @@ public class GuiEvento implements Serializable {
         this.eventoDao = eventoDao;
     }
 
+    public Integer getAno() {
+        return ano;
+    }
+
+    public void setAno(Integer ano) {
+        this.ano = ano;
+    }
+
+    
+    
     public List<Evento> getEventos() {
         return eventos;
     }

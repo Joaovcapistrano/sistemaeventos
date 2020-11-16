@@ -17,6 +17,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import org.femass.dao.TelefoneDao;
@@ -38,7 +39,7 @@ public class Usuario implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true)
     private List<Telefone> telefones = new ArrayList();
     
-    @OneToMany
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<Usuario> parentes = new ArrayList();
     
     @ManyToOne
@@ -162,5 +163,26 @@ public class Usuario implements Serializable {
 
     public void setGrupoTrabalho(GrupoTrabalho grupoTrabalho) {
         this.grupoTrabalho = grupoTrabalho;
+    }
+
+    public List<Usuario> getParentes() {
+        return parentes;
+    }
+
+    public void setParentes(List<Usuario> parentes) {
+        this.parentes = parentes;
+    }
+    
+    public void adicionarParente(Usuario usuario){
+        if(usuario != null){
+            this.parentes.add(usuario);
+            usuario.getParentes().add(this);
+        }
+        
+    }
+    
+    public void removerParente(Usuario usuario){
+        this.parentes.remove(usuario);
+        usuario.getParentes().remove(this);
     }
 }

@@ -43,6 +43,7 @@
                 
                 <div class="p-field">
               
+                    <p:outputLabel value="Telefones" />
                     <p:commandButton value="Adicionar Telefone" id="addtelefone" oncomplete="PF('addtel').show()"  style="margin-right:20px;">
                         <f:actionListener binding="#{guiUsuario.novoTelefone()}" /> 
                     </p:commandButton>
@@ -83,6 +84,45 @@
                     </p:dataTable>
                       
                 </div>  
+                
+                <div class="p-field">
+                    
+                    <p:outputLabel value="Parentes" />
+                    <p:commandButton value="Adicionar Parente" id="addParente" oncomplete="PF('addpar').show()"  style="margin-right:20px;">
+                        <f:actionListener binding="#{guiUsuario.novoParente()}" /> 
+                    </p:commandButton>
+                    
+                    
+                    
+                    <p:dialog id="dialogParente" header="Adicionar Parente" widgetVar="addpar" modal="true" height="150">
+                        
+                        <p:outputLabel value="Nome" />
+                        <p:selectOneMenu value="#{guiUsuario.parente}">
+                            <f:selectItem value="#{null}" itemLabel="Nenhum parente" noSelectionOption="true" />
+                            <f:selectItems value="#{guiUsuario.listarParentes()}" var="p" itemLabel="#{p.nomeCompleto}" itemValue="#{p.id}" />
+                        </p:selectOneMenu>
+                        
+                        <p:commandButton value="Adicionar Parente" id="gravarPar" update="tabelaParente, dialogParente" onclick="PF('addpar').hide()">
+                            <f:actionListener binding="#{guiUsuario.adicionarParente(guiUsuario.parente)}" /> 
+                        </p:commandButton>
+                         
+                        
+                    </p:dialog>    
+                    
+                    <p:dataTable id="tabelaParente" var="parente" value="#{guiUsuario.user.parentes}">
+                        
+                        <p:column headerText="Nome">
+                            <p:outputLabel value="#{parente.nomeCompleto}" />
+                        </p:column>
+
+                        <p:column headerText="Excluir">
+                            <p:commandButton value="X" id="excluirParente" update="tabelaParente" action="#{guiUsuario.removerParente}" >
+                                <f:setPropertyActionListener value="#{parente}" target="#{guiUsuario.parenteSelecionado}" /> 
+                            </p:commandButton>
+                        </p:column> 
+                        
+                    </p:dataTable>
+                </div>
                 
                 <div class="p-field">
                     <p:outputLabel value="Login" />

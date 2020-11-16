@@ -22,6 +22,7 @@
             
         </h:form>
         
+        <h:form>
         <p:dataTable id="userData" var="user" value="#{guiUsuario.usuarios}">
             <p:column headerText="ID">
                 <h:outputLabel value="#{user.id}" />
@@ -43,7 +44,7 @@
                 
             </p:column>
         </p:dataTable>
-        
+        </h:form>
     </h:body>
     
     <p:dialog id="verDetalhes" dynamic="true" header="Detalhes do Usuário" widgetVar="ver" modal="true" height="525" width="750">
@@ -75,7 +76,7 @@
                                     </div>
 
                                     <div id="divTel" class="p-field">
-
+                                        <p:outputLabel value="Telefones" />
                                         <p:dataTable id="tabelaTel" var="telefone" value="#{guiUsuario.user.telefones}" >
                                             <p:column headerText="DDD">
                                                 <p:outputLabel value="#{telefone.ddd}" />
@@ -87,7 +88,18 @@
 
                                         </p:dataTable>
 
-                                    </div>  
+                                    </div> 
+                                    
+                                    <div id="divParente" class="p-field">
+                                        <p:outputLabel value="Parentes" />
+                                        <p:dataTable id="tabelaParente" var="parente" value="#{guiUsuario.user.parentes}">
+                        
+                                            <p:column headerText="Nome">
+                                                <p:outputLabel value="#{parente.nomeCompleto}"  />
+                                            </p:column>
+
+                                        </p:dataTable>
+                                    </div>
 
                                     <div id="divLogin" class="p-field">
                                         <p:outputLabel value="Login" />

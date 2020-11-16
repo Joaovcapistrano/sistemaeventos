@@ -8,6 +8,7 @@ package org.femass.gui;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import org.femass.dao.TelefoneDao;
@@ -43,6 +44,10 @@ public class GuiUsuario implements Serializable {
     private Telefone telefoneSelecionado = new Telefone();
     
     private Boolean ativo=true;
+    
+    private Integer parente;
+    
+    private Usuario parenteSelecionado = new Usuario();
         
     public GuiUsuario() {
   
@@ -56,6 +61,7 @@ public class GuiUsuario implements Serializable {
     public String cadastrar(){
         user = new Usuario();
         telefone = new Telefone();
+        
         return "CadUsuario";
     }
     
@@ -93,6 +99,10 @@ public class GuiUsuario implements Serializable {
         telefone.setUsuario(user);
     }
     
+    public void novoParente(){
+        parente = null;
+        
+    }
     public Telefone getTelefoneSelecionado(){
         return telefoneSelecionado;
     }
@@ -100,6 +110,7 @@ public class GuiUsuario implements Serializable {
     public void setTelefoneSelecionado(Telefone telefoneSelecionado) {
         this.telefoneSelecionado = telefoneSelecionado;
     }
+    
     
     
     public Telefone getTelefone() {
@@ -122,10 +133,48 @@ public class GuiUsuario implements Serializable {
         user.removerTelefones(telefoneSelecionado);
         
     }
+    
+    public List<Usuario> listarParentes(){
+        List<Usuario> parentes = new ArrayList<>();
+        for(Usuario us: usuarioDao.listar()){
+            if(!us.equals(user) && !us.getParentes().contains(user)){
+              parentes.add(us);
+            } 
+        }
+        return parentes;
+    }
+    
+    public void removerParente(){
+        user.removerParente(parenteSelecionado);
+        parenteSelecionado.removerParente(user);
+    }
 
     public void setAtivo(Boolean ativado) {
         this.ativo = ativado;
     }
+
+    public Integer getParente() {
+        return parente;
+    }
+
+    public void setParente(Integer parente) {
+        this.parente = parente;
+    }
+    
+    public void adicionarParente(Integer usuario){
+        Usuario par = usuarioDao.buscarID(usuario);
+        user.adicionarParente(par);          
+    }
+
+    public Usuario getParenteSelecionado() {
+        return parenteSelecionado;
+    }
+
+    public void setParenteSelecionado(Usuario parenteSelecionado) {
+        this.parenteSelecionado = parenteSelecionado;
+    }
+    
+    
     
     public void ativarDesativar()
     {

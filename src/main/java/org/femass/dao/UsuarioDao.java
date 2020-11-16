@@ -37,11 +37,11 @@ public class UsuarioDao {
         return q.getResultList();
     }
 
-    public List<Usuario> buscarID(String id)
+    public Usuario buscarID(Integer id)
     {
         Query q = em.createQuery("select u from Usuario u where u.id = :i");
         q.setParameter("i", id);
-        return q.getResultList();
+        return (Usuario) q.getSingleResult();
     }
     
 }
