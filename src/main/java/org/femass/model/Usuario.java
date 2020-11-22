@@ -39,7 +39,7 @@ public class Usuario implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true)
     private List<Telefone> telefones = new ArrayList();
     
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToMany//(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<Usuario> parentes = new ArrayList();
     
     @ManyToOne

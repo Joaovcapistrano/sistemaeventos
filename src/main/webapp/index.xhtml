@@ -19,7 +19,7 @@
         
         <h:form>            
             <h:panelGrid columnClasses="value">
-                <p:schedule id="calendario" value="#{scheduleJava8View.eventModel}" draggable="false" resizable="false" widgetVar="calendarioEventos"  >            
+                <p:schedule id="calendario" value="#{scheduleJava8View.eventModel}" draggable="false" resizable="false" widgetVar="calendarioEventos" >            
                       <p:ajax event="eventSelect" listener="#{scheduleJava8View.onEventSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" /> 
                 </p:schedule>
             </h:panelGrid>

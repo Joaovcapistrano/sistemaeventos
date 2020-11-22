@@ -5,6 +5,7 @@ import org.primefaces.model.ScheduleModel;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -69,7 +70,7 @@ public class ScheduleJava8View implements Serializable {
                 .data(ev.getId().toString())
                 .title(ev.getNome())
                 .startDate(ev.getDataInicio().atStartOfDay())
-                .endDate(ev.getDataFim().atTime(23, 59))
+                .endDate(ev.getDataFim().plusDays(1).atStartOfDay())
                 .description(ev.getDescricao())
                 .allDay(true)
                 .editable(false)

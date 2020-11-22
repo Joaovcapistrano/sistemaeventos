@@ -74,6 +74,10 @@ public class GuiUsuario implements Serializable {
         {
             usuarioDao.alterar(user);
         }
+        for(Usuario usuario: user.getParentes())
+        {
+            usuarioDao.alterar(usuario);
+        }
         return inicializarLista();
     }
     
@@ -146,7 +150,8 @@ public class GuiUsuario implements Serializable {
     
     public void removerParente(){
         user.removerParente(parenteSelecionado);
-        parenteSelecionado.removerParente(user);
+        //parenteSelecionado.removerParente(user);
+        usuarioDao.alterar(parenteSelecionado);
     }
 
     public void setAtivo(Boolean ativado) {
@@ -161,9 +166,12 @@ public class GuiUsuario implements Serializable {
         this.parente = parente;
     }
     
-    public void adicionarParente(Integer usuario){
+    public void adicionarParente(Integer usuario){    
         Usuario par = usuarioDao.buscarID(usuario);
-        user.adicionarParente(par);          
+        if(!user.getParentes().contains(par))
+        {
+            user.adicionarParente(par); 
+        }            
     }
 
     public Usuario getParenteSelecionado() {
