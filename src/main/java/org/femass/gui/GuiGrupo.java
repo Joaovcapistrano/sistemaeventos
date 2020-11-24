@@ -72,11 +72,6 @@ public class GuiGrupo implements Serializable {
     }
 
     public String gravar() {
-        /*for (Usuario u : usuarios) {
-            if (u.getId().equals(idLider)) {
-                grupo.setLider(u);
-            }
-        }*/
         if (alterando == false) {
             grupodao.gravar(grupo);
         } else {

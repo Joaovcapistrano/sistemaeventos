@@ -26,7 +26,7 @@
              
         </h:form>
         
-        <p:dataTable id="eventData" var="evento" value="#{guiEvento.eventos}">
+        <p:dataTable id="eventData" var="evento" value="#{guiEvento.eventos}" emptyMessage="Nenhum registro encontrado">
             
             <p:column headerText="ID">
                 <h:outputLabel value="#{evento.id}" />

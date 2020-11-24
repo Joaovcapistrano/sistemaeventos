@@ -23,7 +23,7 @@
         </h:form>
         
         <h:form>
-        <p:dataTable id="userData" var="user" value="#{guiUsuario.usuarios}">
+        <p:dataTable id="userData" var="user" value="#{guiUsuario.usuarios}" emptyMessage="Nenhum registro encontrado">
             <p:column headerText="ID">
                 <h:outputLabel value="#{user.id}" />
             </p:column>
@@ -77,7 +77,7 @@
 
                                     <div id="divTel" class="p-field">
                                         <p:outputLabel value="Telefones" />
-                                        <p:dataTable id="tabelaTel" var="telefone" value="#{guiUsuario.user.telefones}" >
+                                        <p:dataTable id="tabelaTel" var="telefone" value="#{guiUsuario.user.telefones}" emptyMessage="Nenhum registro encontrado" >
                                             <p:column headerText="DDD">
                                                 <p:outputLabel value="#{telefone.ddd}" />
                                             </p:column>
@@ -92,7 +92,7 @@
                                     
                                     <div id="divParente" class="p-field">
                                         <p:outputLabel value="Parentes" />
-                                        <p:dataTable id="tabelaParente" var="parente" value="#{guiUsuario.user.parentes}">
+                                        <p:dataTable id="tabelaParente" var="parente" value="#{guiUsuario.user.parentes}" emptyMessage="Nenhum registro encontrado">
                         
                                             <p:column headerText="Nome">
                                                 <p:outputLabel value="#{parente.nomeCompleto}"  />
@@ -113,6 +113,11 @@
                                             <f:selectItems value="#{guiUsuario.tiposDeUsuario}"  />  
                                         </p:selectOneMenu>
                                     </div> 
+                                    
+                                    <div id="divGrupo" class="p-field">
+                                        <p:outputLabel value="Grupo" />
+                                        <p:inputText id="grupo" value="#{guiUsuario.user.grupoTrabalho.nome}" disabled="true"/>
+                                    </div>
 
                                     <div id="divAlterar" class="p-field">
                                         <p:commandButton value="Alterar" id="alterar" action="CadUsuario"  style="margin-right:20px;" ajax="false" />                                                                            

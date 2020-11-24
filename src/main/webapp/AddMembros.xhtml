@@ -44,7 +44,7 @@
             
             <h3>Lista de membros</h3>
             
-            <p:dataTable value="#{guiGrupo.grupo.membros}" var="m">
+            <p:dataTable value="#{guiGrupo.grupo.membros}" var="m" emptyMessage="Nenhum registro encontrado">
                 
                 <p:column headerText="ID" style="width:18px">
                     <p:outputLabel value="#{m.id}" />

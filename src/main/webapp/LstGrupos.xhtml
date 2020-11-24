@@ -23,7 +23,7 @@
                 <p:commandButton value="Sortear todos" action="#{guiGrupo.sortearTodosGrupos()}" ajax="false" icon="fa fa-align-justify" />
             </h:column>
 
-            <p:dataTable value="#{guiGrupo.grupos}" var="gr">
+            <p:dataTable value="#{guiGrupo.grupos}" var="gr" emptyMessage="Nenhum registro encontrado">
 
                 <p:column headerText="ID" style="width:13px">
                     <p:outputLabel value="#{gr.id}" />
@@ -83,7 +83,7 @@
 
             <h3>Lista de membros</h3>
 
-            <p:dataTable value="#{guiGrupo.grupoSelecionado.membros}" var="m">
+            <p:dataTable value="#{guiGrupo.grupoSelecionado.membros}" var="m" emptyMessage="Nenhum registro encontrado">
 
                 <p:column headerText="ID" style="width:18px">
                     <p:outputLabel value="#{m.id}" />

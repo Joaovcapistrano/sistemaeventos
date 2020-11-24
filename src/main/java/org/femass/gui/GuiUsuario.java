@@ -11,8 +11,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
+import org.femass.dao.GrupoDao;
 import org.femass.dao.TelefoneDao;
 import org.femass.dao.UsuarioDao;
+import org.femass.model.GrupoTrabalho;
 import org.femass.model.NivelAcesso;
 import org.femass.model.Telefone;
 import org.femass.model.Usuario;
@@ -31,6 +33,9 @@ public class GuiUsuario implements Serializable {
     
     @EJB
     UsuarioDao usuarioDao;
+    
+    @EJB
+    GrupoDao grupodao;
     
     @EJB
     TelefoneDao telefoneDao;
@@ -82,7 +87,17 @@ public class GuiUsuario implements Serializable {
     }
     
     public String excluir(){
-        usuarioDao.deletar(user);
+        if(user.getGrupoTrabalho()==null){
+            usuarioDao.deletar(user);
+        }else{
+            GrupoTrabalho g = user.getGrupoTrabalho();
+            if(g.getLider()==user){
+                g.setLider(null);
+            }
+            g.removerMembros(user);
+            grupodao.alterar(g);
+            usuarioDao.deletar(user);
+        }
         return inicializarLista();
     }
 

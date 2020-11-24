@@ -11,19 +11,20 @@
     <h:body>
         
         <h:form>
-            
+         
+        <p:growl id="growl" showDetail="true" sticky="true" />    
         <h3>Dados Cadastrais</h3>
         
             <div class="ui-fluid">
                 
                 <div class="p-field">
                     <p:outputLabel value="Nome Completo" />
-                    <p:inputText id="nome" value="#{guiUsuario.user.nomeCompleto}" />
+                    <p:inputText id="nome" value="#{guiUsuario.user.nomeCompleto}" required="true" requiredMessage="Nome é um campo obrigatório" />
                 </div>
                 
                 <div class="p-field">
                     <p:outputLabel value="Data de Nascimento" />
-                    <p:calendar id="dataNasc" value="#{guiUsuario.user.dataNascimento}" pattern="dd/MM/yyyy" navigator="true" mask="99/99/9999" showOn="button" />
+                    <p:calendar id="dataNasc" value="#{guiUsuario.user.dataNascimento}" pattern="dd/MM/yyyy" navigator="true" mask="99/99/9999" showOn="button" required="true" requiredMessage="Data de nascimento é um campo obrigatório" />
                 </div>
                 
                 <div class="p-field">
@@ -65,7 +66,7 @@
                         
                     </p:dialog>    
                
-                    <p:dataTable id="tabelaTel" var="telefone" value="#{guiUsuario.user.telefones}">
+                    <p:dataTable id="tabelaTel" var="telefone" value="#{guiUsuario.user.telefones}" emptyMessage="Nenhum registro encontrado">
                         
                         <p:column headerText="DDD">
                             <p:outputLabel value="#{telefone.ddd}" />
@@ -109,7 +110,7 @@
                         
                     </p:dialog>    
                     
-                    <p:dataTable id="tabelaParente" var="parente" value="#{guiUsuario.user.parentes}">
+                    <p:dataTable id="tabelaParente" var="parente" value="#{guiUsuario.user.parentes}" emptyMessage="Nenhum registro encontrado">
                         
                         <p:column headerText="Nome">
                             <p:outputLabel value="#{parente.nomeCompleto}" />
