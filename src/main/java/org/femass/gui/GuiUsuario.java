@@ -87,6 +87,16 @@ public class GuiUsuario implements Serializable {
     }
     
     public String excluir(){
+        
+        List<Usuario> tempList = new ArrayList<>();
+        tempList.addAll(user.getParentes());
+        
+        for(Usuario usuario: tempList)
+        {
+            user.removerParente(usuario);
+            usuarioDao.alterar(usuario);
+        }
+        
         if(user.getGrupoTrabalho()==null){
             usuarioDao.deletar(user);
         }else{

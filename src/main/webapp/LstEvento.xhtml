@@ -19,9 +19,14 @@
             <h:column>
                 <p:commandButton value="Cadastrar" id="cad" action="#{guiEvento.cadastrar()}" style="margin-right:20px;" ajax="false" />
             </h:column>
-             
+            
             <h:column>
-                <p:commandButton value="Autocadastrar aniversários" id="cadAniv" action="#{guiEvento.cadastrarAniversarios()}" style="margin-right:20px;" ajax="false" />
+                <p:commandButton value="Autocadastrar aniversários" id="cadAniv" action="#{guiEvento.cadastrarAniversarios}" style="margin-right:20px;" ajax="false" />
+            </h:column>
+                          
+            <h:column>
+                <p:inputMask id="focus" title="Insira o ano desejado para cadastrar os aniverários" value="#{guiEvento.ano}" mask="9999"/>
+                <p:tooltip id="toolTipFocus" for="focus" showEvent="focus" hideEvent="blur" />                   
             </h:column>
              
         </h:form>
@@ -50,7 +55,28 @@
         </p:dataTable>
         
     </h:body>
+    
+
+ <!--   <p:dialog id="selecionarAno" header="Selecionar ano" widgetVar="ano" modal="true">
         
+       
+            <div class="p-field">
+                <p:outputLabel value="Ano" />
+                <p:inputText id="ano" value="#{guiEvento.ano}" />
+            </div>  
+
+            <h:column>
+                <form>
+                    <p:commandButton value="Gerar" id="gerarAniv" action="#{guiEvento.cadastrarAniversarios()}" style="margin-right:20px;">
+                
+                    </p:commandButton>
+                </form>
+            </h:column>
+        
+        
+            
+    </p:dialog>
+  !-->  
     <p:dialog id="verDetalhes" dynamic="true" header="Detalhes do Evento" widgetVar="ver" modal="true" height="525" width="750">
         <h:form >
             

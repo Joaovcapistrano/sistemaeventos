@@ -44,16 +44,5 @@ public class UsuarioDao {
         return (Usuario) q.getSingleResult();
     }
     
-    public void deletarParente(Usuario u1, Usuario u2)
-    {
-        Query q = em.createQuery("delete from parente where usuario_id = :i AND parentes_id = :j");
-        q.setParameter("i", u1.getId());
-        q.setParameter("j", u2.getId());
-        q.executeUpdate();
-        Query j = em.createQuery("delete from parente where usuario_id = :i AND parentes_id = :j");
-        j.setParameter("j", u1.getId());
-        j.setParameter("i", u2.getId());
-        j.executeUpdate();
-    }
     
 }
