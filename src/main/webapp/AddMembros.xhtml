@@ -20,7 +20,7 @@
             <p:panelGrid columns="3">
                 
                 <p:outputLabel value="Usuário" />
-                <p:selectOneMenu value="#{guiGrupo.idMembro}" style="width:400px">
+                <p:selectOneMenu value="#{guiGrupo.idMembro}" style="width:400px" filterPlaceholder="Digite para buscar..." filter="true" filterMatchMode="startsWith">
                     <f:selectItem itemLabel="Nenhum usuário selecionado" itemValue="#{null}" noSelectionOption="true"/>
                     <f:selectItems value="#{guiGrupo.usuarios}" var="u" itemLabel="#{u.nomeCompleto}" itemValue="#{u.id}" />
                 </p:selectOneMenu>
@@ -28,7 +28,7 @@
                 <p:commandButton value="Adicionar" action="#{guiGrupo.adicionarMembro()}" ajax="false" style="width:200px" />
                 
                 <p:outputLabel value="Líder" />
-                <p:selectOneMenu value="#{guiGrupo.idLider}" style="width:400px">
+                <p:selectOneMenu value="#{guiGrupo.idLider}" style="width:400px" filterPlaceholder="Digite para buscar..." filter="true" filterMatchMode="startsWith">
                     <f:selectItem itemLabel="Nenhum líder selecionado" itemValue="#{null}" noSelectionOption="true"/>
                     <f:selectItems value="#{guiGrupo.grupo.membros}" var="m" itemLabel="#{m.nomeCompleto}" itemValue="#{m.id}" />
                 </p:selectOneMenu>

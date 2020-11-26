@@ -98,7 +98,7 @@
                     <p:dialog id="dialogParente" header="Adicionar Parente" widgetVar="addpar" modal="true" height="150">
                         
                         <p:outputLabel value="Nome" />
-                        <p:selectOneMenu value="#{guiUsuario.parente}">
+                        <p:selectOneMenu value="#{guiUsuario.parente}" filterPlaceholder="Digite para buscar..." autoWidth="true" filter="true" filterMatchMode="startsWith">
                             <f:selectItem value="#{null}" itemLabel="Nenhum parente" noSelectionOption="true" />
                             <f:selectItems value="#{guiUsuario.listarParentes()}" var="p" itemLabel="#{p.nomeCompleto}" itemValue="#{p.id}" />
                         </p:selectOneMenu>
