@@ -69,6 +69,14 @@
                                             <f:selectItem itemLabel="Feminino" itemValue="feminino" />                        
                                         </p:selectOneButton>
                                     </div>
+                                    
+                                    <div class="p-field" id="divFoto">
+                                        <p:outputLabel value="Foto de perfil" />   
+                                        <br/>
+                                        <h:form id="fotoForm" >                            
+                                            <p:graphicImage id="fotoUsuario" value="#{guiUsuario.user.foto}" width="auto" height="200" />
+                                        </h:form>                             
+                                    </div>
 
                                     <div id="divEnd" class="p-field">
                                         <p:outputLabel value="Endereço" />

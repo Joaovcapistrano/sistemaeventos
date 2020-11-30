@@ -8,9 +8,11 @@ package org.femass.model;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -21,6 +23,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import org.femass.dao.TelefoneDao;
+import org.primefaces.event.FileUploadEvent;
 
 @Entity
 public class Usuario implements Serializable {
@@ -35,6 +38,9 @@ public class Usuario implements Serializable {
     private LocalDate dataNascimento;
     private String login;
     private String senha;
+    
+    @Column(columnDefinition = "text")
+    private String foto;
     
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true)
     private List<Telefone> telefones = new ArrayList();
@@ -184,5 +190,19 @@ public class Usuario implements Serializable {
     public void removerParente(Usuario usuario){
         this.parentes.remove(usuario);
         usuario.getParentes().remove(this);
+    }
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
+    
+    public void uploadFoto(FileUploadEvent event){
+        byte[] content = event.getFile().getContent();
+        String resp = "data:image/jpeg;base64," + Base64.getEncoder().encodeToString(content);
+        this.setFoto(resp);
     }
 }

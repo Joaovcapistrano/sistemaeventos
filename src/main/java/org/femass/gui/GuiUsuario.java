@@ -18,6 +18,7 @@ import org.femass.model.GrupoTrabalho;
 import org.femass.model.NivelAcesso;
 import org.femass.model.Telefone;
 import org.femass.model.Usuario;
+import org.primefaces.model.file.UploadedFile;
 
 /**
  *
@@ -53,6 +54,8 @@ public class GuiUsuario implements Serializable {
     private Integer parente;
     
     private Usuario parenteSelecionado = new Usuario();
+    
+    private UploadedFile arquivoFoto;
         
     public GuiUsuario() {
   
@@ -75,14 +78,17 @@ public class GuiUsuario implements Serializable {
         {
             usuarioDao.gravar(user);
         }
+        
         else
         {
             usuarioDao.alterar(user);
         }
+        
         for(Usuario usuario: user.getParentes())
         {
             usuarioDao.alterar(usuario);
         }
+        
         return inicializarLista();
     }
     
@@ -205,6 +211,14 @@ public class GuiUsuario implements Serializable {
 
     public void setParenteSelecionado(Usuario parenteSelecionado) {
         this.parenteSelecionado = parenteSelecionado;
+    }
+
+    public UploadedFile getArquivoFoto() {
+        return arquivoFoto;
+    }
+
+    public void setArquivoFoto(UploadedFile arquivoFoto) {
+        this.arquivoFoto = arquivoFoto;
     }
     
     

@@ -10,12 +10,12 @@
     
     <h:body>
         
-        <h:form>
+        <h:form id="mainForm">
          
         <p:growl id="growl" showDetail="true" sticky="true" />    
         <h3>Dados Cadastrais</h3>
         
-            <div class="ui-fluid">
+            <div id="mainDiv" class="ui-fluid">
                 
                 <div class="p-field">
                     <p:outputLabel value="Nome Completo" />
@@ -35,6 +35,14 @@
                     </p:selectOneButton>
                 </div>
                 
+                <div class="p-field" id="divFoto">
+                    <p:outputLabel value="Foto de perfil" />              
+                    <h:form id="fotoForm" enctype="multipart/form-data">        
+                        <p:fileUpload listener="#{guiUsuario.user.uploadFoto}" label="Escolher" auto="true" update=":mainForm:fotoForm:fotoUsuario"/>
+                        <p:graphicImage id="fotoUsuario" value="#{guiUsuario.user.foto}" width="auto" height="200" />
+                    </h:form>                             
+                </div>
+
                 <div class="p-field">
                     <p:outputLabel value="Endereço" />
                     <p:inputText id="endereco" value="#{guiUsuario.user.endereco}" />
