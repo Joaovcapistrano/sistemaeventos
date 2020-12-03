@@ -1,0 +1,25 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html">
+	
+    <head>
+        <script src="https://kit.fontawesome.com/0c5b7747b6.js" crossorigin="anonymous"></script>
+    </head>
+	<nav class="aw-menu">
+		<ul>
+			<li>
+                                <h:link outcome="index"><i class="fa  fa-fw  fa-home"></i>Agenda</h:link>
+			</li>
+			<li>
+				<h:link outcome="#{guiUsuario.inicializarLista()}"><i class="fa  fa-fw  fa-user"></i>Usuários</h:link>
+			</li>
+			<li>
+				<h:link outcome="#{guiGrupo.inicializarLista()}"><i class="fas fa-users"></i>Grupos</h:link>
+			</li>
+			<li>
+				<h:link outcome="#{guiEvento.inicializarLista()}"><i class="fas fa-clipboard-list"></i>Eventos</h:link>
+			</li>
+		</ul>
+	</nav>
+	
+</ui:composition>
