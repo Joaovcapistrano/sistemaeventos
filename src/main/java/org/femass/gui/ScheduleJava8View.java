@@ -119,7 +119,7 @@ public class ScheduleJava8View implements Serializable {
                 .build();
         eventModel.addEvent(scheduleEventAllDay);
  */
-        lazyEventModel = new LazyScheduleModel() {
+ /*       lazyEventModel = new LazyScheduleModel() {
              
             @Override
             public void loadEvents(LocalDateTime start, LocalDateTime end) {
@@ -128,7 +128,7 @@ public class ScheduleJava8View implements Serializable {
                     addEvent(DefaultScheduleEvent.builder().title("Lazy Event " + i).startDate(random).endDate(random.plusHours(3)).build());
                 }
             }
-        };
+        }; */
     }
      
     public LocalDateTime getRandomDateTime(LocalDateTime base) {

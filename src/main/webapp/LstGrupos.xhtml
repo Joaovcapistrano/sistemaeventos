@@ -10,14 +10,15 @@
         
     <h:body>
         <h:form>
-            <p:growl id="growl" showDetail="true" sticky="true" />
+            
+            <p:growl id="growl" showDetail="true" sticky="true" skipDetailIfEqualsSummary="true"/>
 
             <h:column>
-                <p:commandButton value="Cadastrar" action="#{guiGrupo.cadastrar()}" style="margin-right:20px;" ajax="false" icon="fa fa-align-justify" />
+                <p:commandButton value="Cadastrar" action="#{guiGrupo.cadastrar()}" style="margin-right:20px;" ajax="false"/>
             </h:column>
 
             <h:column>
-                <p:commandButton value="Sortear todos" action="#{guiGrupo.sortearTodosGrupos()}" ajax="false" icon="fa fa-align-justify" />
+                <p:commandButton value="Sortear todos" action="#{guiGrupo.sortearTodosGrupos()}" ajax="false"/>
             </h:column>
 
             <br/><br/>
