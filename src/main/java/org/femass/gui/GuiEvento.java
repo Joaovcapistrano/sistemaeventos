@@ -45,7 +45,7 @@ public class GuiEvento implements Serializable {
     
     public String inicializarLista(){
         eventos = eventoDao.listar();
-        evento = new Evento();
+        //evento = new Evento();
         return "LstEvento";
     }
     
