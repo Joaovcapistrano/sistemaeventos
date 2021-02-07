@@ -32,7 +32,7 @@
         <h:form>
         <p:dataTable id="eventData" var="evento" value="#{guiEvento.eventos}" emptyMessage="Nenhum registro encontrado">
             
-            <p:column headerText="ID">
+            <p:column headerText="ID" style="width:17px">
                 <h:outputLabel value="#{evento.id}" />
             </p:column>
 
@@ -77,52 +77,36 @@
     </p:dialog>
   !-->  
     <p:dialog id="verDetalhes" dynamic="true" header="Detalhes do Evento" widgetVar="ver" modal="true" height="525" width="750">
-        <h:form >
+        <h:form>
             
             <h3>Dados do Evento</h3>
             
-            <div class="ui-fluid">
-                
-                <div class="p-field">
+            <p:panelGrid columns="2">
                     <p:outputLabel value="Nome do Evento" />
-                    <p:inputText id="nome" value="#{guiEvento.evento.nome}" disabled="true" />
-                </div>
-                
-                <div class="p-field">
+                    <p:inputText id="nome" value="#{guiEvento.evento.nome}" style="width:400px" disabled="true" />
+
                     <p:outputLabel value="Descrição do Evento" />
-                    <p:inputTextarea id="descricao" rows="6" cols="33" value="#{guiEvento.evento.descricao}" disabled="true"/>
-                </div>
-                
-                <div class="p-field">
+                    <p:inputTextarea id="descricao" rows="6" cols="33" value="#{guiEvento.evento.descricao}" style="width:400px" disabled="true" />
+
                     <p:outputLabel value="Data de Início" />
                     <p:calendar id="dataInicio" value="#{guiEvento.evento.dataInicio}" pattern="dd/MM/yyyy" navigator="true" mask="99/99/9999" showOn="button" disabled="true" />
-                </div>
-                
-                <div class="p-field">
+
                     <p:outputLabel value="Data de Término" />
-                    <p:calendar id="dataFim" value="#{guiEvento.evento.dataFim}" pattern="dd/MM/yyyy" navigator="true" mask="99/99/9999" showOn="button" disabled="true"/>
-                </div>
-                                              
-                <div class="p-field">
+                    <p:calendar id="dataFim" value="#{guiEvento.evento.dataFim}" pattern="dd/MM/yyyy" navigator="true" mask="99/99/9999" showOn="button" disabled="true" />
+
                     <p:outputLabel value="Local do evento" />
-                    <p:inputText id="localEvento" value="#{guiEvento.evento.localEvento}" disabled="true"/>
-                </div>
-                
-                <div class="p-field">
+                    <p:inputText id="localEvento" value="#{guiEvento.evento.localEvento}" disabled="true" />
+
                     <p:outputLabel value="Local de inscrição" />
-                    <p:inputText id="local" value="#{guiEvento.evento.localInscricao}" disabled="true"/>
-                </div>
-                                             
-                <div class="p-field">
+                    <p:inputText id="local" value="#{guiEvento.evento.localInscricao}" disabled="true" />
+
                     <p:outputLabel value="Público Alvo" />
-                    <p:inputText id="publicoAlvo" value="#{guiEvento.evento.publicoAlvo}" disabled="true"/>
-                </div>
-                
-                <div class="p-field">
+                    <p:inputText id="publicoAlvo" value="#{guiEvento.evento.publicoAlvo}" disabled="true" />
+
                     <p:outputLabel value="Valor de Investimento" />
-                    <p:inputText id="valorInvestimento" value="#{guiEvento.evento.valorInvestimento}" disabled="true"/>
-                </div>   
-                
+                    <p:inputText id="valorInvestimento" value="#{guiEvento.evento.valorInvestimento}" disabled="true" />
+                </p:panelGrid>
+            
                 <div id="divAlterar" class="p-field">
                     <p:commandButton value="Alterar" id="alterar" action="CadEvento"  style="margin-right:20px;" ajax="false" />                                                                            
                 </div>
@@ -131,7 +115,6 @@
                     <p:commandButton value="Excluir" id="excluir" action="#{guiEvento.excluir()}"  style="margin-right:20px;" ajax="false" />                                                                            
                 </div>
                 
-              </div>
             
         </h:form>
         

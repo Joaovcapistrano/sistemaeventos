@@ -1,167 +1,153 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui"
-	template="/WEB-INF/templates/Layout.xhtml">
-	
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templates/Layout.xhtml">
+
     <ui:define name="content">
-	<h1 class="aw-page-title">Cadastro de Usuário</h1>
-    
-    <h:body>
-        
-        <h:form id="mainForm">
-         
-        <p:growl id="growl" showDetail="true" sticky="true" skipDetailIfEqualsSummary="true"/>
-        <h3>Dados Cadastrais</h3>
-        
-            <div id="mainDiv" class="ui-fluid">
-                
-                <div class="p-field">
-                    <p:outputLabel value="Nome Completo" />
-                    <p:inputText id="nome" value="#{guiUsuario.user.nomeCompleto}" required="true" requiredMessage="Nome é um campo obrigatório" />
-                </div>
-                
-                <div class="p-field">
-                    <p:outputLabel value="Data de Nascimento" />
-                    <p:calendar id="dataNasc" value="#{guiUsuario.user.dataNascimento}" pattern="dd/MM/yyyy" navigator="true" mask="99/99/9999" showOn="button" required="true" requiredMessage="Data de nascimento é um campo obrigatório" />
-                </div>
-                
-                <div class="p-field">
-                    <p:outputLabel value="Sexo" />
-                    <p:selectOneButton value="#{guiUsuario.user.sexo}">
-                        <f:selectItem itemLabel="Masculino" itemValue="masculino" />
-                        <f:selectItem itemLabel="Feminino" itemValue="feminino" />                        
-                    </p:selectOneButton>
-                </div>
-                
-                <div class="p-field" id="divFoto">
-                    <p:outputLabel value="Foto de perfil" />              
-                    <h:form id="fotoForm" enctype="multipart/form-data">        
-                        <p:fileUpload listener="#{guiUsuario.user.uploadFoto}" label="Escolher" auto="true" update=":mainForm:fotoForm:fotoUsuario"/>
-                        <p:graphicImage id="fotoUsuario" value="#{guiUsuario.user.foto}" width="auto" height="200" />
-                    </h:form>                             
-                </div>
+        <h1 class="aw-page-title">Cadastro de Usuário</h1>
 
-                <div class="p-field">
-                    <p:outputLabel value="Endereço" />
-                    <p:inputText id="endereco" value="#{guiUsuario.user.endereco}" />
-                </div>
-                
-                
-                
-                <div class="p-field">
-              
-                    <p:outputLabel value="Telefones" />
-                    <p:commandButton value="Adicionar Telefone" id="addtelefone" oncomplete="PF('addtel').show()"  style="margin-right:20px;">
-                        <f:actionListener binding="#{guiUsuario.novoTelefone()}" /> 
-                    </p:commandButton>
-                    
-                    
-                    
-                    <p:dialog id="dialogTel" header="Adicionar Telefone" dynamic="true" widgetVar="addtel" modal="true" height="150">
-                        
-                        <p:outputLabel value="DDD" />
-                        <p:inputMask id="ddd" value="#{guiUsuario.telefone.ddd}" mask="(99)"/>
-                        
-                        <p:outputLabel value="Número" />
-                        <p:inputMask id="numero" value="#{guiUsuario.telefone.numero}" mask="9 9999-9999"/>
-                        
-                        <p:commandButton value="Gravar Telefone" id="gravarTel" update="tabelaTel, dialogTel" onclick="PF('addtel').hide()">
-                            <f:actionListener binding="#{guiUsuario.user.adicionarTelefones(guiUsuario.telefone)}" /> 
-                        </p:commandButton>
-                         
-                        
-                    </p:dialog>    
-               
-                    <p:dataTable id="tabelaTel" var="telefone" value="#{guiUsuario.user.telefones}" emptyMessage="Nenhum registro encontrado">
-                        
-                        <p:column headerText="DDD">
-                            <p:outputLabel value="#{telefone.ddd}" />
-                        </p:column>
+        <h:body>
 
-                        <p:column headerText="Número">
-                            <p:outputLabel value="#{telefone.numero}" />
-                        </p:column>
-                        
-                        <p:column headerText="Excluir">
-                            <p:commandButton value="X" id="excluirTel" update="tabelaTel" action="#{guiUsuario.removerTelefones}" >
-                                <f:setPropertyActionListener value="#{telefone}" target="#{guiUsuario.telefoneSelecionado}" /> 
+            <h:form id="mainForm">
+
+                <p:growl id="growl" showDetail="true" sticky="true" skipDetailIfEqualsSummary="true"/>
+                <h3>Dados Cadastrais</h3>
+
+                <div id="mainDiv" class="ui-fluid">
+
+                    <div class="p-field">
+                        <p:panelGrid columns="2">
+                            <p:outputLabel value="Nome Completo"/>
+                            <p:inputText id="nome" value="#{guiUsuario.user.nomeCompleto}" required="True" requiredMessage="Nome é um campo obrigatório" style="width:500px"/>
+
+                            <p:outputLabel value="Data de Nascimento" />
+                            <p:calendar id="dataNasc" value="#{guiUsuario.user.dataNascimento}" pattern="dd/MM/yyyy" navigator="true" mask="99/99/9999" showOn="button" required="true" requiredMessage="Data de nascimento é um campo obrigatório" style="width:200px"/>
+
+                            <p:outputLabel value="Sexo" />
+                            <p:selectOneButton value="#{guiUsuario.user.sexo}" style="width:200px">
+                                <f:selectItem itemLabel="Masculino" itemValue="masculino" />
+                                <f:selectItem itemLabel="Feminino" itemValue="feminino" />                        
+                            </p:selectOneButton>
+
+                            <p:outputLabel value="Endereço" />
+                            <p:inputText id="endereco" value="#{guiUsuario.user.endereco}" />
+
+
+                            <p:outputLabel value="Foto de perfil" />              
+                            <h:form id="fotoForm" enctype="multipart/form-data">        
+                                <p:fileUpload listener="#{guiUsuario.user.uploadFoto}" label="Escolher" auto="true" update=":mainForm:fotoForm:fotoUsuario"/>
+                                <p:graphicImage id="fotoUsuario" value="#{guiUsuario.user.foto}" width="auto" height="200" />
+                            </h:form>   
+
+                            <p:outputLabel value="Telefones" />
+                            <p:commandButton value="Adicionar Telefone" id="addtelefone" oncomplete="PF('addtel').show()"  style="margin-right:20px;width:200px">
+                                <f:actionListener binding="#{guiUsuario.novoTelefone()}" /> 
                             </p:commandButton>
-                        </p:column> 
-                        
-                    </p:dataTable>
-                      
-                </div>  
-                
-                <div class="p-field">
-                    
-                    <p:outputLabel value="Parentes" />
-                    <p:commandButton value="Adicionar Parente" id="addParente" oncomplete="PF('addpar').show()"  style="margin-right:20px;">
-                        <f:actionListener binding="#{guiUsuario.novoParente()}" /> 
-                    </p:commandButton>
-                    
-                    
-                    
-                    <p:dialog id="dialogParente" header="Adicionar Parente" widgetVar="addpar" modal="true" height="150">
-                        
-                        <p:outputLabel value="Nome" />
-                        <p:selectOneMenu value="#{guiUsuario.parente}" filterPlaceholder="Digite para buscar..." autoWidth="true" filter="true" filterMatchMode="startsWith">
-                            <f:selectItem value="#{null}" itemLabel="Nenhum parente" noSelectionOption="true" />
-                            <f:selectItems value="#{guiUsuario.listarParentes()}" var="p" itemLabel="#{p.nomeCompleto}" itemValue="#{p.id}" />
-                        </p:selectOneMenu>
-                        
-                        <p:commandButton value="Adicionar Parente" id="gravarPar" update="tabelaParente, dialogParente" onclick="PF('addpar').hide()">
-                            <f:actionListener binding="#{guiUsuario.adicionarParente(guiUsuario.parente)}" /> 
-                        </p:commandButton>
-                         
-                        
-                    </p:dialog>    
-                    
-                    <p:dataTable id="tabelaParente" var="parente" value="#{guiUsuario.user.parentes}" emptyMessage="Nenhum registro encontrado">
-                        
-                        <p:column headerText="Nome">
-                            <p:outputLabel value="#{parente.nomeCompleto}" />
-                        </p:column>
 
-                        <p:column headerText="Excluir">
-                            <p:commandButton value="X" id="excluirParente" update="tabelaParente" action="#{guiUsuario.removerParente}" >
-                                <f:setPropertyActionListener value="#{parente}" target="#{guiUsuario.parenteSelecionado}" /> 
+                            <p:outputLabel value="Lista de Telefones"/>
+                            <p:dataTable id="tabelaTel" var="telefone" value="#{guiUsuario.user.telefones}" emptyMessage="Nenhum registro encontrado" style="width:500px">
+
+                                <p:column headerText="DDD">
+                                    <p:outputLabel value="#{telefone.ddd}" />
+                                </p:column>
+
+                                <p:column headerText="Número">
+                                    <p:outputLabel value="#{telefone.numero}" />
+                                </p:column>
+
+                                <p:column headerText="Excluir">
+                                    <p:commandButton value="X" id="excluirTel" update="tabelaTel" action="#{guiUsuario.removerTelefones}" >
+                                        <f:setPropertyActionListener value="#{telefone}" target="#{guiUsuario.telefoneSelecionado}" /> 
+                                    </p:commandButton>
+                                </p:column> 
+
+                            </p:dataTable>
+
+                            <p:outputLabel value="Parentes" />
+                            <p:commandButton value="Adicionar Parente" id="addParente" oncomplete="PF('addpar').show()"  style="margin-right:20px;width:200px">
+                                <f:actionListener binding="#{guiUsuario.novoParente()}" /> 
                             </p:commandButton>
-                        </p:column> 
+
+                            <p:outputLabel value="Lista de parentes" />
+                            <p:dataTable id="tabelaParente" var="parente" value="#{guiUsuario.user.parentes}" emptyMessage="Nenhum registro encontrado" style="width:500px">
+
+                                <p:column headerText="Nome">
+                                    <p:outputLabel value="#{parente.nomeCompleto}" />
+                                </p:column>
+
+                                <p:column headerText="Excluir">
+                                    <p:commandButton value="X" id="excluirParente" update="tabelaParente" action="#{guiUsuario.removerParente}" >
+                                        <f:setPropertyActionListener value="#{parente}" target="#{guiUsuario.parenteSelecionado}" /> 
+                                    </p:commandButton>
+                                </p:column> 
+
+                            </p:dataTable>
+
+                            <p:outputLabel value="Login" />
+                            <p:inputText id="login" value="#{guiUsuario.user.login}" style="width:200px"/>
+
+                            <p:outputLabel value="Senha" />
+                            <p:password id="senha" value="#{guiUsuario.user.senha}" feedback="true" redisplay="true" style="width:200px" />
+
+                            <p:outputLabel value="Tipo de Usuário   " />
+                            <p:selectOneMenu id="nivelAcesso" value="#{guiUsuario.user.nivelAcesso}" style="width:200px">
+                                <f:selectItems value="#{guiUsuario.tiposDeUsuario}"  />  
+                            </p:selectOneMenu>
+                            
+                        </p:panelGrid>
                         
-                    </p:dataTable>
+                        <p:commandButton value="Gravar" id="gravar" action="#{guiUsuario.gravar()}" style="margin-right:20px;width:150px" ajax="false"/>
+                        <p:commandButton value="Voltar" action="#{guiUsuario.inicializarLista()}" ajax="false" immediate="true" style="margin-right:20px;width:150px" />
+
+                    
+                    </div>
+
+                    <div class="p-field">
+
+                        <p:dialog id="dialogTel" header="Adicionar Telefone" dynamic="true" widgetVar="addtel" modal="true" height="150">
+
+                            <p:outputLabel value="DDD" />
+                            <p:inputMask id="ddd" value="#{guiUsuario.telefone.ddd}" mask="(99)"/>
+
+                            <p:outputLabel value="Número" />
+                            <p:inputMask id="numero" value="#{guiUsuario.telefone.numero}" mask="9 9999-9999"/>
+
+                            <p:commandButton value="Gravar Telefone" id="gravarTel" update="tabelaTel, dialogTel" onclick="PF('addtel').hide()">
+                                <f:actionListener binding="#{guiUsuario.user.adicionarTelefones(guiUsuario.telefone)}" /> 
+                            </p:commandButton>
+
+                        </p:dialog>    
+
+                    </div>  
+
+                    <div class="p-field">
+
+                        <p:dialog id="dialogParente" header="Adicionar Parente" widgetVar="addpar" modal="true" height="150">
+
+                            <p:outputLabel value="Nome" />
+                            <p:selectOneMenu value="#{guiUsuario.parente}" filterPlaceholder="Digite para buscar..." autoWidth="true" filter="true" filterMatchMode="startsWith">
+                                <f:selectItem value="#{null}" itemLabel="Nenhum parente" noSelectionOption="true" />
+                                <f:selectItems value="#{guiUsuario.listarParentes()}" var="p" itemLabel="#{p.nomeCompleto}" itemValue="#{p.id}" />
+                            </p:selectOneMenu>
+
+                            <p:commandButton value="Adicionar Parente" id="gravarPar" update="tabelaParente, dialogParente" onclick="PF('addpar').hide()">
+                                <f:actionListener binding="#{guiUsuario.adicionarParente(guiUsuario.parente)}" /> 
+                            </p:commandButton>
+
+                        </p:dialog>    
+
+                    </div>
+
                 </div>
-                
-                <div class="p-field">
-                    <p:outputLabel value="Login" />
-                    <p:inputText id="login" value="#{guiUsuario.user.login}" />
-                </div>
-                
-                <div class="p-field">
-                    <p:outputLabel value="Senha" />
-                    <p:password id="senha" value="#{guiUsuario.user.senha}" feedback="true" redisplay="true" />
-                </div>
-                
-                <div class="p-field">
-                    <p:outputLabel value="Tipo de Usuário   " />
-                    <p:selectOneMenu id="nivelAcesso" value="#{guiUsuario.user.nivelAcesso}" style="width:200px">
-                        <f:selectItems value="#{guiUsuario.tiposDeUsuario}"  />  
-                    </p:selectOneMenu>
-                </div>
-                
-                <div class="p-field">
-                   <p:commandButton value="Gravar" id="gravar" action="#{guiUsuario.gravar()}" style="margin-right:20px;" ajax="false" />
-                </div>
- 
-            </div>
-        
-        </h:form>
-        
-    </h:body>
-    
+
+            </h:form>
+
+        </h:body>
+
     </ui:define>
-	
+
 </ui:composition>
 
 
