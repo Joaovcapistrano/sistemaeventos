@@ -6,18 +6,24 @@
         <script src="https://kit.fontawesome.com/0c5b7747b6.js" crossorigin="anonymous"></script>
     </h:head>
 	<nav class="aw-menu">
-		<ul>
+		<ul>                        
 			<li>
                                 <h:link outcome="index"><i class="fa  fa-fw  fa-home"></i>Agenda</h:link>
 			</li>
 			<li>
-				<h:link outcome="#{guiUsuario.inicializarLista()}"><i class="fa  fa-fw  fa-user"></i>Usuários</h:link>
+                                <h:link rendered="#{guiLogin.verListaUsuarios}" outcome="#{guiUsuario.inicializarLista()}"><i class="fa  fa-fw  fa-user"></i>Usuários</h:link>
 			</li>
 			<li>
-				<h:link outcome="#{guiGrupo.inicializarLista()}"><i class="fas fa-users"></i>Grupos</h:link>
+                                <h:link rendered="#{guiLogin.verListaGrupos}" outcome="#{guiGrupo.inicializarLista()}"><i class="fas fa-users"></i>Grupos</h:link>
 			</li>
 			<li>
-				<h:link outcome="#{guiEvento.inicializarLista()}"><i class="fas fa-clipboard-list"></i>Eventos</h:link>
+                                <h:link rendered="#{guiLogin.verListaEventos}" outcome="#{guiEvento.inicializarLista()}" ><i class="fas fa-clipboard-list"></i>Eventos</h:link>
+			</li>
+                        <li>
+                                <h:link rendered="#{!guiLogin.conectado}" outcome="Login"><i class="fas fa-user-cog"></i>Entrar</h:link>
+			</li>
+                        <li>
+                                <h:link rendered="#{guiLogin.conectado}" outcome="SuaConta"><i class="fas fa-user-cog"></i>Sua Conta</h:link>
 			</li>
 		</ul>
 	</nav>

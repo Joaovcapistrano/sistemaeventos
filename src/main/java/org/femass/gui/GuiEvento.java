@@ -11,6 +11,8 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import org.femass.dao.EventoDao;
 import org.femass.dao.UsuarioDao;
 import org.femass.model.Evento;
@@ -105,6 +107,9 @@ public class GuiEvento implements Serializable {
             
             eventoDao.gravar(ev);
         }
+        }
+        else{
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Insira o ano antes de tentar gerar os eventos!"));
         }
         ano=null;
         return inicializarLista();

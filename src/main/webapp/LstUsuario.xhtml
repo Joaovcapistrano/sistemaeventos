@@ -32,7 +32,7 @@
                         <h:outputLabel value="#{user.dataNascimento}" converter="localDateFacesConverter" />
                     </p:column>
 
-                    <p:column headerText="Mais detalhes" style="text-align: center">
+                    <p:column rendered="#{guiLogin.verDetalhesUsuarios}" headerText="Mais detalhes" style="text-align: center">
 
                         <p:commandButton value="Ver Mais" id="details" oncomplete="PF('ver').show()" style="margin-right:20px;" update="verDetalhes">
                             <f:setPropertyActionListener value="#{user}" target="#{guiUsuario.user}"/>
@@ -49,16 +49,16 @@
                 <h3>Dados Cadastrais</h3>
                 <p:panelGrid columns="2">
                     <p:outputLabel value="Nome Completo"/>
-                    <p:inputText id="nome" value="#{guiUsuario.user.nomeCompleto}" style="width:500px" disabled="true"/>
+                    <p:inputText id="nome" value="#{guiUsuario.user.nomeCompleto}" style="width: 500px" disabled="true"/>
 
                     <p:outputLabel value="Data de Nascimento" />
                     <p:calendar id="dataNasc" value="#{guiUsuario.user.dataNascimento}" pattern="dd/MM/yyyy" navigator="true" mask="99/99/9999" showOn="button" style="width:200px" disabled="true"/>
 
                     <p:outputLabel value="Sexo" />
-                    <p:calendar id="sexo" value="#{guiUsuario.user.sexo}" style="width:200px" disabled="true"/>
+                    <p:inputText id="sexo" value="#{guiUsuario.user.sexo}" style="width:150px" disabled="true"/>
 
                     <p:outputLabel value="Endereço" />
-                    <p:inputText id="endereco" value="#{guiUsuario.user.endereco}" disabled="true"/>
+                    <p:inputText id="endereco" value="#{guiUsuario.user.endereco}" style="width: 500px" disabled="true"/>
 
 
                     <p:outputLabel value="Foto de perfil" />              
@@ -96,14 +96,13 @@
                     <p:inputText id="grupo" value="#{guiUsuario.user.grupoTrabalho.nome}" disabled="true"/>
 
                 </p:panelGrid> 
+                
+                <p:panelGrid rendered="#{guiLogin.editarUsuarios}" columns="2">
 
-                <div id="divAlterar" class="p-field">
-                    <p:commandButton value="Alterar" id="alterar" action="CadUsuario"  style="margin-right:20px;" ajax="false" />                                                                            
-                </div>
-
-                <div id="divExcluir" class="p-field">
-                    <p:commandButton value="Excluir" id="excluir" action="#{guiUsuario.excluir()}"  style="margin-right:20px;" ajax="false" />                                                                            
-                </div>
+                    <p:commandButton value="Excluir" id="excluir" action="#{guiUsuario.excluir()}" ajax="false" />                                                                            
+                    <p:commandButton value="Alterar" id="alterar" action="CadUsuario" ajax="false" />                                                                            
+                
+                </p:panelGrid>
 
             </h:form>                                          
         </p:dialog>

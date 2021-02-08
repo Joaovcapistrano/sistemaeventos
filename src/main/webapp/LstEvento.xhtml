@@ -7,22 +7,26 @@
 	
     <ui:define name="content">
 	<h1 class="aw-page-title">Lista de Eventos</h1>
+        
     
     <h:body>
         
-         <h:form>            
+        
+         <h:form>     
              
+            <p:growl id="growl" showDetail="true" sticky="false" skipDetailIfEqualsSummary="true"/>
+            
             <h:column>
-                <p:commandButton value="Cadastrar" id="cad" action="#{guiEvento.cadastrar()}" style="margin-right:20px;" ajax="false" />
+                <p:commandButton rendered="#{guiLogin.editarEventos}" value="Cadastrar" id="cad" action="#{guiEvento.cadastrar()}" style="margin-right:20px;" ajax="false" />
             </h:column>
             
             <h:column>
-                <p:commandButton value="Autocadastrar aniversários" id="cadAniv" action="#{guiEvento.cadastrarAniversarios}" style="margin-right:20px;" ajax="false" />
+                <p:commandButton rendered="#{guiLogin.editarEventos}" value="Autocadastrar aniversários" id="cadAniv" action="#{guiEvento.cadastrarAniversarios}" style="margin-right:20px;" ajax="false" />
             </h:column>
                           
             <h:column>
-                <p:inputMask id="focus" title="Insira o ano desejado para cadastrar os aniverários" value="#{guiEvento.ano}" mask="9999"/>
-                <p:tooltip id="toolTipFocus" for="focus" showEvent="focus" hideEvent="blur" />                   
+                <p:inputMask rendered="#{guiLogin.editarEventos}" id="focus" title="Insira o ano desejado para cadastrar os aniverários" value="#{guiEvento.ano}" mask="9999"/>
+                <p:tooltip rendered="#{guiLogin.editarEventos}" id="toolTipFocus" for="focus" showEvent="focus" hideEvent="blur" />                   
             </h:column>
              
             <br/><br/>
@@ -44,7 +48,7 @@
                 <h:outputLabel value="#{evento.dataInicio}" converter="localDateFacesConverter" />
             </p:column>
 
-            <p:column headerText="Mais detalhes" style="text-align: center">
+            <p:column rendered="#{guiLogin.verDetalhesEventos}" headerText="Mais detalhes" style="text-align: center">
       
                 <p:commandButton value="Ver Mais" id="details" oncomplete="PF('ver').show()" style="margin-right:20px;" update="verDetalhes">
                     <f:setPropertyActionListener value="#{evento}" target="#{guiEvento.evento}"/>
@@ -107,14 +111,12 @@
                     <p:inputText id="valorInvestimento" value="#{guiEvento.evento.valorInvestimento}" disabled="true" />
                 </p:panelGrid>
             
-                <div id="divAlterar" class="p-field">
-                    <p:commandButton value="Alterar" id="alterar" action="CadEvento"  style="margin-right:20px;" ajax="false" />                                                                            
-                </div>
-                                    
-                <div id="divExcluir" class="p-field">
-                    <p:commandButton value="Excluir" id="excluir" action="#{guiEvento.excluir()}"  style="margin-right:20px;" ajax="false" />                                                                            
-                </div>
+                <p:panelGrid rendered="#{guiLogin.editarEventos}" columns="2">
                 
+                    <p:commandButton value="Excluir" id="excluir" action="#{guiEvento.excluir()}" ajax="false" /> 
+                    <p:commandButton value="Alterar" id="alterar" action="CadEvento" ajax="false" />
+                    
+               </p:panelGrid> 
             
         </h:form>
         

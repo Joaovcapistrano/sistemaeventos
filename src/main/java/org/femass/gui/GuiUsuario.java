@@ -57,7 +57,7 @@ public class GuiUsuario implements Serializable {
     private Usuario parenteSelecionado = new Usuario();
 
     private UploadedFile arquivoFoto;
-
+    
     public GuiUsuario() {
 
     }

@@ -52,6 +52,11 @@
 	transition: margin-left 0.5s;
 }
 
+.ui-growl{
+    right: 0.5%;
+    top: 6%;
+}
+
 @media (min-width: 960px) {
 	.aw-content {
 		margin-left: 210px;
