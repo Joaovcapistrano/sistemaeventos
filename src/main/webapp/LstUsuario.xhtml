@@ -13,7 +13,7 @@
             <h:form>         
 
                 <h:column>
-                    <p:commandButton value="Cadastrar" id="cad" action="#{guiUsuario.cadastrar()}" style="margin-right:20px;" ajax="false" />
+                    <p:commandButton rendered="#{guiLogin.editarUsuarios}" value="Cadastrar" id="cad" action="#{guiUsuario.cadastrar()}" style="margin-right:20px;" ajax="false" />
                 </h:column>
                 <br/><br/>
             </h:form>
