@@ -20,7 +20,7 @@
                                 <h:link rendered="#{guiLogin.verListaEventos}" outcome="#{guiEvento.inicializarLista()}" ><i class="fas fa-clipboard-list"></i>Eventos</h:link>
 			</li>
                         <li>
-                                <h:link rendered="#{!guiLogin.conectado}" outcome="Login"><i class="fas fa-user-cog"></i>Entrar</h:link>
+                                <h:link rendered="#{!guiLogin.conectado}" outcome="#{guiLogin.inicializarLista()}"><i class="fas fa-user-cog"></i>Entrar</h:link>
 			</li>
                         <li>
                                 <h:link rendered="#{guiLogin.conectado}" outcome="SuaConta"><i class="fas fa-user-cog"></i>Sua Conta</h:link>

@@ -36,7 +36,6 @@ public class GuiLogin implements Serializable {
     @EJB
     UsuarioDao usuarioDao;
     
-    private GuiUsuario guiUsuario;
 
     private List<Usuario> usuarios;
 
@@ -242,8 +241,4 @@ public class GuiLogin implements Serializable {
         }
     }
     
-    public String alterarUsuario(){
-        guiUsuario.setUser(usuarioConectado);
-        return "CadUsuario";
-    }
 }
